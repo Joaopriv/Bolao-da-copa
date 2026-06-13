@@ -1,0 +1,16 @@
+# Deploy do frontend Vite/React no Netlify.
+# `base` faz o Netlify entrar em frontend/ antes do build (e instalar as deps de
+# frontend/package.json automaticamente). `publish` é relativo a `base`, então o
+# diretório final é frontend/dist (NÃO usar "frontend/dist" aqui, viraria
+# frontend/frontend/dist).
+[build]
+  base    = "frontend"
+  command = "npm run build"
+  publish = "dist"
+
+# SPA fallback: qualquer rota cai no index.html (200, não 301) para o app React
+# resolver client-side. Inofensivo mesmo sem router; necessário se um for adicionado.
+[[redirects]]
+  from   = "/*"
+  to     = "/index.html"
+  status = 200

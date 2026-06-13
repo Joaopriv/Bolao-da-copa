@@ -1,0 +1,31 @@
+━━ VALIDAÇÃO DO BLEND MODELO × MERCADO — COPA 2026 ━━
+
+ Abordagem A (Occam): P_blend = α·P_modelo + (1-α)·P_mercado, α=0.5 fixo (sem otimização).
+ Teste direto nos jogos da Copa 2026 com resultado real + odds disponíveis.
+
+ AMOSTRA
+   jogos com resultado real + odds .... 1
+   excluídos (resultado mas SEM odds) .. 3:
+       México 2×0 África do Sul
+       Coreia do Sul 1×1 República Tcheca
+       Canadá 1×1 Bósnia e Herzegovina
+
+ RPS POR JOGO (menor é melhor)
+   jogo                                         modelo    blend        Δ
+   Estados Unidos 4×1 Paraguai                  0.3746   0.2649  -0.1098
+
+ RPS MÉDIO
+   modelo puro ........ 0.3746
+   blend (α=0.5) ..... 0.2649
+   diferença média .... -0.1098  (negativo = blend melhor)
+
+ IC95% BOOTSTRAP DA DIFERENÇA (blend - modelo, 1000 reamostras)
+   ponto: -0.1098  IC: [-0.1098, -0.1098]
+
+ DECISÃO: INCONCLUSIVO (N=1 < 30 -> amostra insuficiente para um IC confiável; aguardar mais rodadas). Mantém enabled=false.
+
+ ⚠ AVISO HONESTO: N=1 é pequeno demais para um veredito.
+   Com N=1 o bootstrap é DEGENERADO (toda reamostra é o mesmo jogo ->
+   IC de largura zero). O 'IC todo < 0' acima é artefato, NÃO evidência.
+   Decisão suspensa até N >= 30 (~Rodada 2-3). O teste
+   ganha poder a cada rodada: re-rodar --blend-check após --update-round.

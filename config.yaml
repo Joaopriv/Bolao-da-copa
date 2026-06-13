@@ -1,0 +1,379 @@
+# ════════════════════════════════════════════════════════════════════════════
+# Bolão Copa 2026 — Configuração (Iteração 1: modelagem sobre GOLS)
+# Todos os hiperparâmetros e tabelas de normalização ficam AQUI (nada hardcoded).
+# ════════════════════════════════════════════════════════════════════════════
+
+data:
+  source_url: "https://raw.githubusercontent.com/martj42/international_results/master"
+  files: ["results.csv", "shootouts.csv", "goalscorers.csv"]
+  raw_dir: "1_data/raw"
+  processed_dir: "1_data/processed"
+  min_date: "2006-01-01"   # janela de relevância (jogos anteriores são descartados)
+  today: "2026-06-12"      # corte: jogos com placar NaN e data > today = fixtures a prever
+
+# ── Pré-processamento e ponderação dos jogos ────────────────────────────────
+preprocess:
+  # Peso temporal: w_t = exp(-lambda * dias_desde_o_jogo). Testar no backtest.
+  temporal_decay_lambda: 0.0015
+  # [Auditoria M7/P9] `lambda_grid` documenta os candidatos considerados para
+  # `temporal_decay_lambda` -- NÃO é consumido automaticamente (nenhum sweep
+  # roda em --compare/--select). Um sweep automático nos `members` completos
+  # seria caro: poisson ~287s/fit x 6 membros x 7 torneios x 3 lambdas
+  # (proibitivo, fora do orçamento documentado acima para poisson/bivariate_poisson).
+  # Checagem pontual já feita (dixon_coles, rápido, WC2018+CopaAm2019, iters=200):
+  #   lambda=0.0008 -> RPS=0.1848 | lambda=0.0015 -> RPS=0.1836 | lambda=0.0030 -> RPS=0.1875
+  # 0.0015 (valor atual) tem o melhor ponto entre os 3, mas os ICs se sobrepõem --
+  # não é decisivo, só consistente com manter 0.0015. Para re-tunar no futuro,
+  # use `--compare --lam <valor> --models <modelo> --tournaments <...>` manualmente.
+  lambda_grid: [0.0008, 0.0015, 0.0030]
+  # Peso por competição (mapeado aos valores REAIS da coluna `tournament` do martj42)
+  competition_weights:
+    "FIFA World Cup": 1.00
+    "Confederations Cup": 0.90
+    "UEFA Euro": 0.90
+    "Copa América": 0.90
+    "AFC Asian Cup": 0.85
+    "African Cup of Nations": 0.85
+    "Gold Cup": 0.80
+    "CONCACAF Championship": 0.80
+    "UEFA Nations League": 0.75
+    "CONCACAF Nations League": 0.72
+    "FIFA World Cup qualification": 0.65
+    "UEFA Euro qualification": 0.60
+    "African Cup of Nations qualification": 0.55
+    "AFC Asian Cup qualification": 0.55
+    "Friendly": 0.30
+  default_competition_weight: 0.50   # qualquer torneio não listado acima
+  # Peso de overlap de elenco — DESLIGADO na Iteração 1 (precisa de roster 2026 + Transfermarkt).
+  squad_overlap_weight: 1.0
+
+# ── Modelos (penaltyblog) ───────────────────────────────────────────────────
+# API confirmada na instalação: Model(goals_home, goals_away, teams_home, teams_away,
+#   weights, neutral_venue).fit(); .predict(home, away, neutral_venue) -> FootballProbabilityGrid
+#   com .home_draw_away [pH,pD,pA] e .grid (matriz 15x15 de placares).
+models:
+  max_goals: 10            # truncamento do grid para extrair placares
+  # Membros usados no backtest/ensemble. O bayesiano (m6) entra com mode="fast"
+  # (ver `bayesian` abaixo) — viável para --compare/--select (~1-2min extra no total).
+  members: ["poisson", "dixon_coles", "bivariate_poisson", "elo", "bayesian", "dixon_coles_xg"]
+  # poisson e bivariate_poisson usam SLSQP sobre 2*n_teams+1 parâmetros (penaltyblog).
+  # Na base completa (~22.6k jogos, ~320 times) o poisson leva ~287s/fit (instável: em
+  # alguns cortes chega a ~520s) e o bivariate_poisson ~50s — inviável em --compare
+  # (7 torneios x 2 instâncias [standalone + ensemble]). max_train_matches limita aos
+  # jogos mais relevantes (mesmo critério de peso recência+competição); validado
+  # empiricamente em ~7-10s/fit nessa faixa. dixon_coles e elo seguem na base completa
+  # (dixon_coles já é rápido: ~9s em 22.6k linhas).
+  poisson:
+    max_train_matches: 3000
+  bivariate_poisson:
+    max_train_matches: 3000
+  dixon_coles:
+    use_temporal_weights: true
+  elo:
+    k: 24.0
+    home_field_advantage: 65.0   # vantagem de mando reduzida (muitos jogos em campo neutro)
+    initial_rating: 1500.0
+    draw_base: 0.30
+    draw_width: 200.0
+  bayesian:
+    # HierarchicalBayesianGoalModel via MCMC (EnsembleSampler). O custo escala com
+    # n_walkers = max(50, 2*(2*n_teams+4)+10) -> domina tanto o fit quanto o predict()
+    # (que faz a média sobre o trace). max_train_matches limita n_teams (e portanto
+    # n_walkers); n_samples/burn/n_chains controlam o tamanho do trace.
+    #
+    # Modo usado por padrão (--compare/--select, via models_registry).
+    default_mode: "fast"
+    # fast: ~5s/fit + ~60ms/predict (n_train=200 -> ~156 times, trace=50). Em --compare
+    # (7 torneios x 2 instâncias [bayesian + dentro do ensemble]), soma ~80s no total.
+    fast:
+      n_samples: 50
+      burn: 25
+      n_chains: 1
+      max_train_matches: 200
+    # full: ~16s/fit + ~0.5s/predict (n_train=800 -> ~212 times, trace=300). Usado só
+    # em --predict-2026 (UM fit no dataset completo) — mais preciso, custo único de ~1min.
+    # [Auditoria M5/P5] CAVEAT: o RPS do bayesiano no funil de --compare/--select usa
+    # "fast" (trace menor, mais ruidoso); --predict-2026 usa "full". Se o bayesiano for
+    # `chosen` ou tiver peso relevante no ensemble, o número validado pode não bater
+    # exatamente com produção -- build_justification() (selection.py) emite um aviso
+    # nesse caso. Rodar "full" dentro do backtest custaria ~16s x 7 torneios x 2
+    # instâncias (bayesian + ensemble) ≈ 4min extra em --compare, fora do orçamento
+    # de custo documentado abaixo -- não implementado.
+    full:
+      n_samples: 150
+      burn: 75
+      n_chains: 2
+      max_train_matches: 800
+    # sequential: [Iteração 2] prior do --update-round N vem do posterior da rodada N-1.
+    # Placeholder com os parâmetros de `fast`; sequential_backtest.py ainda é stub.
+    sequential:
+      n_samples: 50
+      burn: 25
+      n_chains: 1
+      max_train_matches: 200
+  ensemble:
+    # pesos otimizados APENAS na validação (torneios antigos), nunca no teste final.
+    weight_grid_step: 0.1
+  dixon_coles_xg:
+    # [Iteração 2 / Prompt C4] Dixon-Coles treinado sobre xG (StatsBomb), arredondado
+    # p/ inteiro. Abaixo de min_train_matches jogos com xG na janela de treino, o
+    # modelo não conhece nenhum time -> fallback 1X2 / sem placar (mesmo padrão do Elo).
+    min_train_matches: 30
+  dynamic_dc:
+    # [m8] Dixon-Coles dinâmico: a_i/d_i (ataque/defesa por seleção) evoluem como random
+    # walk online (filtro de gradiente estocástico, "Elo para gols") em vez de força
+    # estática + decay no peso. eta calibrado via grid {0.02,0.05,0.1,0.2} no conjunto de
+    # validação (WC2018, CopaAm2019, Euro2020, CopaAm2021): curva monotonicamente
+    # crescente em eta (RPS_val 0.17869/0.18090/0.19067/0.21553) -> eta=0.02 escolhido.
+    # [Auditoria P13] Implementado e registrado em models_registry (`--models
+    # dynamic_dc` roda ad-hoc), mas FORA de `members` -- não participa de
+    # --compare/--select por padrão. Decisão (não-ação): incluí-lo mudaria a
+    # dimensão do simplex do ensemble (P10) e o funil de eliminação,
+    # arriscando alterar `chosen`/`selected_model.json` (RESTRIÇÃO: deve
+    # permanecer 'poisson') -- exigiria revalidação completa (regra do IC,
+    # mesmo procedimento de squad_offset_check/h2h_check), fora do escopo
+    # desta rodada de correções. Fica registrado para Iteração 2+.
+    eta_attack: 0.02
+    eta_defense: 0.02
+    rho: null            # null -> herda rho da MLE estática (DixonColesGoalModel)
+    home_advantage: null # null -> herda home_advantage da MLE estática
+    init_from_static: true
+
+# ── Validação científica (o coração do projeto) ─────────────────────────────
+validation:
+  bootstrap_iterations: 1000
+  ci_percentiles: [2.5, 97.5]
+  random_seed: 42
+  # Cada torneio de teste = (label da coluna tournament) + janela de datas.
+  # Treino de cada torneio: SÓ jogos anteriores ao seu `start` (sem vazamento).
+  test_tournaments:
+    - {name: "WC2018",     label: "FIFA World Cup", start: "2018-06-14", end: "2018-07-15", kind: "world_cup",    year: 2018}
+    - {name: "CopaAm2019", label: "Copa América",   start: "2019-06-14", end: "2019-07-07", kind: "copa_america", year: 2019}
+    - {name: "Euro2020",   label: "UEFA Euro",      start: "2021-06-11", end: "2021-07-11", kind: "euro",         year: 2021}
+    - {name: "CopaAm2021", label: "Copa América",   start: "2021-06-13", end: "2021-07-10", kind: "copa_america", year: 2021}
+    - {name: "WC2022",     label: "FIFA World Cup", start: "2022-11-20", end: "2022-12-18", kind: "world_cup",    year: 2022}
+    - {name: "Euro2024",   label: "UEFA Euro",      start: "2024-06-14", end: "2024-07-14", kind: "euro",         year: 2024}
+    - {name: "CopaAm2024", label: "Copa América",   start: "2024-06-20", end: "2024-07-14", kind: "copa_america", year: 2024}
+  # Seleção anti-overfitting: escolhe com torneios <= cutoff; testa UMA vez nos posteriores.
+  selection_cutoff_year: 2021
+  # [Auditoria P10] Regularização L2 dos pesos do ensemble em direção ao uniforme
+  # (1/k), somada ao RPS médio na validação (169 jogos, <= selection_cutoff_year).
+  # Sem isso, a otimização (SLSQP) converge para soluções de canto do simplex (ex.:
+  # dixon_coles=0.93/elo=0.06/demais~0) -- ajuste fino a ruído de uma amostra pequena,
+  # não sinal real. 0.01 custa ~+0.0008 de RPS in-sample (dentro do ruído do IC) e
+  # produz pesos bem mais distribuídos entre os membros (anti-overfit, "ensemble" de
+  # fato). 0.0 desativa (comportamento anterior).
+  ensemble_weight_reg: 0.01
+
+# ── Odds de mercado (The Odds API) — VALIDAÇÃO cruzada apenas, nunca entra nos
+# modelos. "O mercado é régua, não professor." ──────────────────────────────
+odds_api:
+  sport_key: "soccer_fifa_world_cup"
+  regions: "eu"
+  markets: "h2h"
+  devig_method: "multiplicative"   # penaltyblog.implied — método mais simples (Occam)
+  divergence_alert_pp: 10          # alerta se |modelo - mercado| > 10pp em qualquer outcome
+
+# ── Blending modelo × mercado (P_blend = α·P_modelo + (1-α)·P_mercado) ────────
+# Abordagem A (Occam): α=0.5 fixo, sem otimização. DESLIGADO por padrão até a
+# validação out-of-sample (--blend-check) confirmar melhora no RPS (IC95% < 0).
+# Não ativar `enabled: true` antes disso. Ver utils/market_blend.py e
+# 4_validation/market_blend_check.py.
+market_blend:
+  enabled: false
+  alpha: 0.5
+
+# ── Previsão da Copa 2026 ───────────────────────────────────────────────────
+predict_2026:
+  tournament_label: "FIFA World Cup"
+  # Os 72 jogos da fase de grupos JÁ estão no results.csv (placar NaN) — fonte dos fixtures.
+  fixtures_from_dataset: true
+  season_year: 2026
+  top_scores_n: 8             # 8 (era 5) — Seção 2 "top 8 placares clicáveis"
+  ev_max_goals: 7             # grade 0-7 (8x8) p/ EV de placares no bolão
+  heatmap_max_goals: 5        # grade 0-5 (6x6) p/ heatmap de placares
+
+# ── xG via StatsBomb open data (Iteração 2 / Prompt C) ──────────────────────
+# Competições internacionais masculinas com shot_statsbomb_xg disponível
+# (mapeadas em sessão: ~314 jogos, 2018-2024). tournament_label = valor de
+# `matches.tournament` (martj42) para casar por (tournament, home/away, data).
+xg_scraping:
+  competitions:
+    - {competition_id: 43,   season_id: 3,   tournament_label: "FIFA World Cup"}
+    - {competition_id: 55,   season_id: 43,  tournament_label: "UEFA Euro"}
+    - {competition_id: 1267, season_id: 107, tournament_label: "African Cup of Nations"}
+    - {competition_id: 223,  season_id: 282, tournament_label: "Copa América"}
+    - {competition_id: 43,   season_id: 106, tournament_label: "FIFA World Cup"}
+    - {competition_id: 55,   season_id: 282, tournament_label: "UEFA Euro"}
+
+# ── Normalização de nomes de seleção (variante -> canônico martj42) ──────────
+team_aliases:
+  "FYR Macedonia": "North Macedonia"
+  "Macedonia": "North Macedonia"
+  "Cape Verde Islands": "Cape Verde"
+  "Congo DR": "DR Congo"
+  "Congo": "Congo"
+  "United States of America": "United States"
+  "USA": "United States"
+  "Korea Republic": "South Korea"
+  "Korea DPR": "North Korea"
+  "China PR": "China"
+  "Czechia": "Czech Republic"
+  "Bosnia & Herzegovina": "Bosnia and Herzegovina"
+  "Bosnia-Herzegovina": "Bosnia and Herzegovina"
+
+# ── Aliases específicos de nomes StatsBomb -> canônico martj42 (Prompt C2) ───
+# Levantado empiricamente: nomes StatsBomb dos 314 jogos das 6 competições de
+# xg_scraping que não batem com o conjunto canônico de `matches` (após
+# team_aliases acima já aplicado). "Cape Verde Islands"/"Congo DR" já cobertos
+# por team_aliases.
+statsbomb_team_aliases:
+  "Côte d'Ivoire": "Ivory Coast"
+
+# ── Iteração 2 — impacto de jogador (Fase 0 a D6) ──────────────────────────
+national_impact:        # Fase 0 / "Prompt C3" (impacto na seleção via StatsBomb)
+  min_minutes_for_impact: 90
+
+understat:               # D1 — Understat (API JSON interna, ver scraper_players.py)
+  leagues: ["EPL", "La_liga", "Bundesliga", "Serie_A", "Ligue_1", "RFPL"]   # slugs de URL
+  seasons: ["2022", "2023", "2024"]   # temporadas iniciando nesses anos (2022/23-2024/25)
+  rate_limit_seconds: 6
+  min_minutes_total: 500   # abaixo disso -> std_error alto esperado (RAPM)
+
+transfermarkt:            # D2 — matching jogador -> seleção
+  kaggle_dataset: "davidcariboo/player-scores"
+  # fuzz.WRatio (threshold=85, sem normalização) tem um bug sistêmico aqui: o pool de
+  # candidatos (~19k jogadores Transfermarkt das 48 seleções da Copa 2026) inclui
+  # MUITOS jogadores brasileiros registrados só com o primeiro nome ("Rayan", "Alex",
+  # "Diego", "Andrei", ...). Para QUALQUER query cujo primeiro nome coincida, o
+  # partial_ratio do WRatio dá score=90.0 (>= threshold=85) -- empate determinístico
+  # que vence até candidatos corretos com nome completo (ex. "Rayan Aït-Nouri",
+  # Algeria, score=86.7 sem normalização). Resultado: ~40% do squad_2026 de algumas
+  # seleções (ex. Brasil) eram jogadores de OUTRAS seleções (Irlanda, Itália, Nigéria,
+  # Romênia, Dinamarca, Geórgia, Argélia) com nationality='Brazil' incorreta.
+  # Fix: normaliza acentos (NFKD, remove combining chars, lowercase) nos dois lados e
+  # usa fuzz.token_sort_ratio (penaliza diferença de Nº de tokens/comprimento nas DUAS
+  # direções -- ao contrário de token_set_ratio, que também dá 100 quando um nome é
+  # subconjunto do outro, o mesmo problema em direção oposta). threshold=88 validado
+  # empiricamente: rejeita os 10 falsos-positivos conhecidos (score <88) e mantém os
+  # 5 verdadeiros-positivos testados (Vinicius Junior=100, Mbappé=100, Rayan
+  # Aït-Nouri=93.3, Casemiro=100, Messi=100).
+  fuzzy_match_threshold: 88
+  min_last_season: 2022    # só jogadores ativos na janela do Understat (2022/23-2024/25)
+  # Overrides pontuais: nome Understat -> nome usado na busca contra o Transfermarkt.
+  # Mbappé é registrado no Understat com o sobrenome materno ("Kylian Mbappe-Lottin"),
+  # que o Transfermarkt não usa ("Kylian Mbappé") -- token_sort_ratio dá só 78.8 (< 88),
+  # então sem este override ele fica sem seleção/market_value (afeta squad_2026/D5).
+  name_aliases:
+    "Kylian Mbappe-Lottin": "Kylian Mbappé"
+
+# ── Aliases de país Transfermarkt -> canônico martj42 (D2, levantado empiricamente
+# contra as 48 seleções da Copa 2026 em display_names) ────────────────────────────
+transfermarkt_team_aliases:
+  "Bosnia-Herzegovina": "Bosnia and Herzegovina"
+  "Cote d'Ivoire": "Ivory Coast"
+  "Curacao": "Curaçao"
+  "Korea, South": "South Korea"
+  "Korea, North": "North Korea"
+
+squad_2026_build:         # D2 — convocação aproximada (top-N por valor de mercado)
+  roster_size: 26
+  starters_count: 11
+  # Jogadores de clubes grandes (PSG, Real Madrid, Man City) são rotacionados entre
+  # várias competições e por isso têm MENOS minutos numa única temporada do que
+  # "iron men" de clubes de meio de tabela -- ordenar só por minutos elege os
+  # segundos e exclui estrelas (ex. Mbappé/Neymar/Vinícius Jr. ficavam fora do top-26
+  # de França/Brasil). min_minutes_for_squad é só um piso de "jogou de fato nesta
+  # temporada" (filtra lesionados/aposentados com market_value desatualizado); acima
+  # do piso, ordena por market_value (Transfermarkt) desc, depois minutos desc.
+  min_minutes_for_squad: 450   # ~5 jogos completos
+
+rapm:                      # D3 — RAPM-lite (Ridge por temporada)
+  alpha_grid: [0.1, 1.0, 10.0]
+  cv_folds: 5
+  bootstrap_iters: 1000
+
+club_to_national:          # D4 — transferência de impacto clube -> seleção
+  # chaves = slugs de URL do Understat (cfg.understat.leagues / player_seasons.competition)
+  league_factor: {"EPL": 1.00, "La_liga": 1.00, "Bundesliga": 0.97,
+                   "Serie_A": 0.95, "Ligue_1": 0.90, "RFPL": 0.85}
+  # confiança do lado CLUBE (D3 PAUSA: std_error do rapm_club é mais alto justamente
+  # para jogadores com MAIS minutos — bootstrap de Ridge encolhe coeficientes de
+  # baixo-minuto para perto de 0 em toda reamostra, dando std_error baixo mas
+  # enganoso. Por isso a confiança do lado clube vem de MINUTOS, não de std_error.
+  club_min_minutes: 500
+  # Matching nome Understat (curto, "Alvaro Morata") -> StatsBomb (nome legal completo,
+  # "Álvaro Borja Morata Martín"). token_set_ratio (após remover acentos) dá 100 quando
+  # TODOS os tokens do nome curto aparecem no nome longo — WRatio com threshold=85
+  # (usado no D2 Understat<->Transfermarkt) causa falsos-positivos massivos aqui
+  # (qualquer token isolado em comum, ex. "Martín", batia >=85 com fuzz.WRatio).
+  statsbomb_match_threshold: 90
+
+squad_strength:            # D5/D6/D7 — força de elenco e ajuste nos modelos
+  impact_source_priority: ["final_2026", "rapm_club", "statsbomb_national"]
+  squad_offset_weight: 0.0   # DESLIGADO (D7: IC do ensemble cruza zero; correlação
+                              # rapm_club<->statsbomb_national ~0 -- ver relatório D7)
+
+# ── Fator histórico de confronto direto (Iteração 3 / F7) ───────────────────
+# h2h_factor = (vitórias_home - vitórias_away) / n * 0.1 sobre os últimos confrontos
+# diretos (qualquer ordem casa/fora). Amostra < min_matches -> h2h_factor = 0.0
+# (sem ajuste). weight=0.0 -> H2HAdjustedModel não é aplicado (no-op).
+h2h:
+  weight: 0.05       # w_h2h
+  min_matches: 3     # abaixo disso, h2h_factor = 0.0 (amostra insuficiente)
+
+# ── Notas de elenco/lesões/suspensões (Iteração 3 / F6) — canônico EN -> texto ─────
+# Preenchido manualmente antes de cada rodada; exibido no card do jogo
+# (squad_note_home/squad_note_away em predictions_2026.json). Sem impacto no modelo.
+squad_notes: {}
+
+# ── Nomes de exibição PT-BR (canônico EN -> PT-BR) para predictions_2026.json ─
+display_names:
+  "Algeria": "Argélia"
+  "Argentina": "Argentina"
+  "Australia": "Austrália"
+  "Austria": "Áustria"
+  "Belgium": "Bélgica"
+  "Bosnia and Herzegovina": "Bósnia e Herzegovina"
+  "Brazil": "Brasil"
+  "Canada": "Canadá"
+  "Cape Verde": "Cabo Verde"
+  "Colombia": "Colômbia"
+  "Croatia": "Croácia"
+  "Curaçao": "Curaçao"
+  "Czech Republic": "República Tcheca"
+  "DR Congo": "RD Congo"
+  "Ecuador": "Equador"
+  "Egypt": "Egito"
+  "England": "Inglaterra"
+  "France": "França"
+  "Germany": "Alemanha"
+  "Ghana": "Gana"
+  "Haiti": "Haiti"
+  "Iran": "Irã"
+  "Iraq": "Iraque"
+  "Ivory Coast": "Costa do Marfim"
+  "Japan": "Japão"
+  "Jordan": "Jordânia"
+  "Mexico": "México"
+  "Morocco": "Marrocos"
+  "Netherlands": "Holanda"
+  "New Zealand": "Nova Zelândia"
+  "Norway": "Noruega"
+  "Panama": "Panamá"
+  "Paraguay": "Paraguai"
+  "Portugal": "Portugal"
+  "Qatar": "Catar"
+  "Saudi Arabia": "Arábia Saudita"
+  "Scotland": "Escócia"
+  "Senegal": "Senegal"
+  "South Africa": "África do Sul"
+  "South Korea": "Coreia do Sul"
+  "Spain": "Espanha"
+  "Sweden": "Suécia"
+  "Switzerland": "Suíça"
+  "Tunisia": "Tunísia"
+  "Turkey": "Turquia"
+  "United States": "Estados Unidos"
+  "Uruguay": "Uruguai"
+  "Uzbekistan": "Uzbequistão"

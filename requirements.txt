@@ -1,0 +1,33 @@
+# Bolão Copa 2026 — Iteração 1 (modelagem sobre GOLS; sem xG ainda)
+# Núcleo estatístico
+penaltyblog==1.11.0      # Poisson, Dixon-Coles, Bivariate, Bayesian, Elo, implied (Cython)
+pandas
+numpy
+scipy
+scikit-learn             # usado nos baselines/utilidades; RAPM (ridge) vem na Iteração 2
+
+# Pipeline / IO
+pyyaml                   # config.yaml
+requests                 # download dos datasets martj42
+beautifulsoup4           # parsing dos fixtures da Copa 2026 (Wikipedia)
+lxml                     # parser HTML/tabelas para o beautifulsoup/pandas.read_html
+
+# Persistência (Supabase)
+supabase                 # cliente Postgres/REST — fonte de verdade dos dados
+python-dotenv            # carrega SUPABASE_URL / SUPABASE_KEY de .env
+
+# xG (Iteração 2 / Prompt C)
+statsbombpy              # StatsBomb open data — xG por jogo (m3_dixon_coles_xg)
+
+# Relatório
+jinja2                   # template do comparison_report.html
+matplotlib               # gráficos com error bars embutidos no relatório
+
+# Iteração 2 (D1/D2): xG de clube (Understat, API JSON interna — ver scraper_players.py)
+# e matching jogador -> seleção (Transfermarkt via Kaggle + fuzzy match).
+kagglehub                # download do dataset davidcariboo/player-scores (KAGGLE_API_TOKEN em .env)
+rapidfuzz                # fuzzy match Understat <-> Transfermarkt (D2)
+
+# --- Iteração 2 (NÃO instalados agora; descomentar quando necessário) ---
+# pymc                  # bayesiano sequencial avançado
+# arviz                 # diagnóstico de posterior

@@ -1,0 +1,11 @@
+venv/
+.cache/
+__pycache__/
+*.pyc
+1_data/raw/
+5_outputs/comparison_report.html
+.DS_Store
+.ipynb_checkpoints/
+.env
+node_modules/
+frontend/dist/

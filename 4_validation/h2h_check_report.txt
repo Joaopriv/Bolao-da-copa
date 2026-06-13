@@ -1,0 +1,52 @@
+● H2H (confronto direto): cobertura nos 72 jogos da Copa 2026 + revalidação com/sem h2h -- regra do IC (F7) ...
+  H2H disponível (>=3 confrontos): 23/72 jogos
+  H2H insuficiente (<3 confrontos): 22/72 jogos
+  H2H zero (sem histórico): 27/72 jogos
+
+  rodando SEM h2h (weight=0.0) ...
+  · torneio WC2018 ...
+      poisson            RPS=0.2028 [0.1681, 0.2432]
+      dixon_coles        RPS=0.1991 [0.1679, 0.2362]
+      bivariate_poisson  RPS=0.2025 [0.1678, 0.2427]
+      elo                RPS=0.2195 [0.1912, 0.2496]
+      bayesian           RPS=0.2507 [0.2313, 0.2707]
+      dixon_coles_xg     RPS=0.2426 [0.2263, 0.2584]
+      ensemble           RPS=0.2103 [0.1862, 0.2379]
+  · torneio WC2022 ...
+      poisson            RPS=0.2256 [0.1851, 0.2748]
+      dixon_coles        RPS=0.2203 [0.1807, 0.2675]
+      bivariate_poisson  RPS=0.2249 [0.1851, 0.2737]
+      elo                RPS=0.2084 [0.1775, 0.2438]
+      bayesian           RPS=0.2676 [0.2397, 0.3013]
+      dixon_coles_xg     RPS=0.2337 [0.1995, 0.2750]
+      ensemble           RPS=0.2268 [0.1955, 0.2636]
+  m3 eliminado — possível causa: distorção por arredondamento xG->int em jogos de baixo xG (esperado).
+  rodando COM h2h (weight=0.05) ...
+  · torneio WC2018 ...
+      poisson            RPS=0.2028 [0.1682, 0.2432]
+      dixon_coles        RPS=0.1991 [0.1678, 0.2363]
+      bivariate_poisson  RPS=0.2025 [0.1677, 0.2427]
+      elo                RPS=0.2195 [0.1912, 0.2496]
+      bayesian           RPS=0.2505 [0.2313, 0.2704]
+      dixon_coles_xg     RPS=0.2426 [0.2263, 0.2584]
+      ensemble           RPS=0.2103 [0.1861, 0.2379]
+  · torneio WC2022 ...
+      poisson            RPS=0.2253 [0.1848, 0.2748]
+      dixon_coles        RPS=0.2200 [0.1803, 0.2672]
+      bivariate_poisson  RPS=0.2246 [0.1849, 0.2734]
+      elo                RPS=0.2084 [0.1775, 0.2438]
+      bayesian           RPS=0.2682 [0.2402, 0.3022]
+      dixon_coles_xg     RPS=0.2334 [0.1992, 0.2747]
+      ensemble           RPS=0.2265 [0.1949, 0.2630]
+  m3 eliminado — possível causa: distorção por arredondamento xG->int em jogos de baixo xG (esperado).
+
+  modelo                RPS sem    RPS com   IC95% diff (com-sem)  decisão
+  poisson                0.2142     0.2140 [-0.0003, -0.0000]      APROVADO
+  dixon_coles            0.2097     0.2095 [-0.0003, -0.0000]      APROVADO
+  bivariate_poisson      0.2137     0.2136 [-0.0003, -0.0000]      APROVADO
+  elo                    0.2139     0.2139 [+0.0000, +0.0000]      DESCARTADO (Occam, IC cruza zero)
+  bayesian               0.2591     0.2594 [-0.0001, +0.0007]      DESCARTADO (Occam, IC cruza zero)
+  dixon_coles_xg         0.2381     0.2380 [-0.0002, -0.0000]      APROVADO
+  ensemble               0.2186     0.2184 [-0.0004, +0.0000]      DESCARTADO (Occam, IC cruza zero)
+
+  Recomendação (ensemble decide o config final): DESCARTADO (Occam, IC cruza zero)
