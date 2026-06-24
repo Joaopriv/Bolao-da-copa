@@ -1,12 +1,12 @@
 {
   "chosen_model": "poisson",
   "ensemble_weights": {
-    "poisson": 4.723364043082282e-16,
-    "dixon_coles": 0.9314692455226076,
-    "bivariate_poisson": 0.06853075447739178,
-    "elo": 2.4087706785372323e-16,
-    "bayesian": 1.0268434063547196e-16,
-    "dixon_coles_xg": 0.0
+    "poisson": 0.2152108937198434,
+    "dixon_coles": 0.3275261667599577,
+    "bivariate_poisson": 0.23161026161962142,
+    "elo": 0.22565267790057753,
+    "bayesian": 2.1027473236211616e-18,
+    "dixon_coles_xg": 2.329722479810052e-17
   },
   "cutoff_year": 2021,
   "validation_tournaments": [
@@ -22,36 +22,36 @@
   ],
   "in_sample_RPS": {
     "name": "RPS",
-    "point": 0.1804526413889396,
-    "lo": 0.16020356437451075,
-    "hi": 0.2016603833104681,
+    "point": 0.1806237405376904,
+    "lo": 0.1597259687079097,
+    "hi": 0.20226943105698514,
     "n": 169,
     "lower_is_better": true
   },
   "out_of_sample_RPS": {
     "name": "RPS",
-    "point": 0.1989386427381099,
-    "lo": 0.175178519055483,
-    "hi": 0.2246128057387095,
+    "point": 0.19640056071304654,
+    "lo": 0.17303067620270943,
+    "hi": 0.22115276511803975,
     "n": 147,
     "lower_is_better": true
   },
   "funnel": {
-    "best_by_rps": "ensemble",
+    "best_by_rps": "dixon_coles",
     "eliminated": [
       "baseline_naive",
       "baseline_ranking",
-      "elo",
       "bayesian",
       "dixon_coles_xg"
     ],
     "equivalent": [
       "poisson",
+      "elo",
       "dixon_coles",
       "bivariate_poisson",
       "ensemble"
     ],
     "chosen": "poisson"
   },
-  "justification": "Descartados por IC da diferença longe de zero (claramente piores): baseline_naive, baseline_ranking, elo, bayesian, dixon_coles_xg. Equivalentes estatisticamente (IC da diferença cruza zero): poisson, dixon_coles, bivariate_poisson, ensemble. Entre os equivalentes, escolhido 'poisson' por ser o mais simples (navalha de Occam). RPS in-sample (<= 2021) = 0.1805 [0.1602, 0.2017]; RPS out-of-sample (> 2021) = 0.1989 [0.1752, 0.2246] (este é o número honesto). Iteração 1: sem xG/elenco/sequencial — adiados para a Iteração 2 por falta de fonte de dados."
+  "justification": "Descartados por IC da diferença longe de zero (claramente piores): baseline_naive, baseline_ranking, bayesian, dixon_coles_xg. Equivalentes estatisticamente (IC da diferença cruza zero): poisson, elo, dixon_coles, bivariate_poisson, ensemble. Entre os equivalentes, escolhido 'poisson' por ser o mais simples (navalha de Occam). RPS in-sample (<= 2021) = 0.1806 [0.1597, 0.2023]; RPS out-of-sample (> 2021) = 0.1964 [0.1730, 0.2212] (este é o número honesto). Nota (P2/P7): 'equivalentes' = indistinguíveis dada a amostra de validação (poder estatístico limitado), não 'comprovadamente iguais'; e o RPS in-sample do escolhido tende a ser otimista (winner's curse) -- use o out-of-sample para expectativas futuras. Iteração 1: sem xG/elenco/sequencial — adiados para a Iteração 2 por falta de fonte de dados."
 }

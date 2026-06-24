@@ -9,7 +9,7 @@ data:
   raw_dir: "1_data/raw"
   processed_dir: "1_data/processed"
   min_date: "2006-01-01"   # janela de relevância (jogos anteriores são descartados)
-  today: "2026-06-12"      # corte: jogos com placar NaN e data > today = fixtures a prever
+  today: "2026-06-24"      # corte: jogos com placar NaN e data > today = fixtures a prever
 
 # ── Pré-processamento e ponderação dos jogos ────────────────────────────────
 preprocess:
