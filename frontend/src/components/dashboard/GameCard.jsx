@@ -2,6 +2,7 @@ import FlagTeam from "../../shared/FlagTeam";
 import ConfidenceBar from "../../shared/ConfidenceBar";
 import Badge from "../../shared/Badge";
 import { hasDivergence } from "../../utils/divergence";
+import { KNOCKOUT_STAGE_LABELS } from "../../utils/rounds";
 
 export default function GameCard({ match, pick, onOpenAnalysis }) {
   const {
@@ -16,7 +17,9 @@ export default function GameCard({ match, pick, onOpenAnalysis }) {
       <div className="flex items-center justify-between text-xs text-slate-500">
         <span>{date}</span>
         <Badge variant="neutral">
-          Grupo {match.group} · Rodada {match.round}
+          {match.group
+            ? `Grupo ${match.group} · Rodada ${match.round}`
+            : KNOCKOUT_STAGE_LABELS[match.round] ?? match.stage}
         </Badge>
       </div>
 

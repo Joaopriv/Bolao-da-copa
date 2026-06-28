@@ -6,10 +6,11 @@ export function useRoundsAndGroups(predictions) {
     if (!predictions) return [];
     const matches = deriveRoundsAndGroups(predictions);
     if (import.meta.env.DEV) {
-      const missing = matches.filter((m) => !m.group || !m.round);
+      // group é null no mata-mata (confrontos cruzam grupos) -- só round é obrigatório.
+      const missing = matches.filter((m) => !m.round);
       if (missing.length > 0) {
         console.warn(
-          "[useRoundsAndGroups] partidas sem group/round:",
+          "[useRoundsAndGroups] partidas sem round:",
           missing.map((m) => m.game)
         );
       }

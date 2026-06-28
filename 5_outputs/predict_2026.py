@@ -74,6 +74,11 @@ def generate(round_updated: int | None = None, odds_credits: int | None = None) 
     odds_rows = db_client.fetch_all("odds_2026") or []
     odds_map = {r["match_id"]: r for r in odds_rows}
 
+    # round/group_name vêm de copa_2026_results (fonte autoritativa) -- evita
+    # heurística no frontend, que falha no mata-mata (confrontos cruzam grupos).
+    results_rows = db_client.fetch_all("copa_2026_results") or []
+    stage_map = {r["game_id"]: (r["round"], r["group_name"]) for r in results_rows}
+
     fixtures = dataset.get_wc2026_fixtures()
     preds = []
     pred_rows = []  # espelha `preds` em formato tabular p/ Supabase (tabela predictions)
@@ -114,11 +119,14 @@ def generate(round_updated: int | None = None, odds_credits: int | None = None) 
             divergence_direction = model_fav != market_fav
         else:
             divergence_direction = False
+        stage_round, stage_name = stage_map.get(game_id, (None, None))
         preds.append({
             "game": f"{disp.get(home, home)} vs {disp.get(away, away)}",
             "home_team": disp.get(home, home),
             "away_team": disp.get(away, away),
             "date": r["date"].strftime("%Y-%m-%d"),
+            "round": stage_round,
+            "stage": stage_name,
             "confidence": round(float(np.max(p)), 3),  # prob do resultado modal
             "top_scores": top_scores,
             "score_matrix": score_matrix,

@@ -1,24 +1,20 @@
-import { GROUPS_PT } from "../data/groups";
+// Rótulos das fases do mata-mata (round 4-8, vindo de copa_2026_results via predict_2026.py).
+export const KNOCKOUT_STAGE_LABELS = {
+  4: "32-avos",
+  5: "Oitavas",
+  6: "Quartas",
+  7: "Semis",
+  8: "Final",
+};
 
-// Deriva grupo (A-L) e rodada (1-3) para cada partida. Ordena por `date` dentro de
-// cada grupo (não depende da ordem de chegada de `predictions`) e pareia 2 a 2.
+// `round` e `stage` já vêm de predictions_2026.json (autoritativos, de copa_2026_results).
+// Deriva só `group` (letra A-L) a partir de `stage` ("Group A" -> "A"); fica null no
+// mata-mata, onde os confrontos cruzam grupos diferentes.
 export function deriveRoundsAndGroups(predictions) {
-  const withGroup = predictions.map((m) => ({
+  return predictions.map((m) => ({
     ...m,
-    group: GROUPS_PT[m.home_team] ?? null,
+    group: m.stage?.startsWith("Group ") ? m.stage.slice("Group ".length) : null,
   }));
-
-  const byGroup = {};
-  for (const m of withGroup) {
-    (byGroup[m.group] ??= []).push(m);
-  }
-
-  const result = [];
-  for (const group of Object.keys(byGroup)) {
-    const sorted = [...byGroup[group]].sort((a, b) => a.date.localeCompare(b.date));
-    sorted.forEach((m, idx) => result.push({ ...m, round: Math.floor(idx / 2) + 1 }));
-  }
-  return result;
 }
 
 // Agrupa partidas (já com `round`/`group`) em { [round]: { [group]: [matches] } }

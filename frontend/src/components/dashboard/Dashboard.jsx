@@ -16,7 +16,13 @@ export default function Dashboard({ matches, picks, onOpenAnalysis }) {
 
   return (
     <div className="mx-auto max-w-6xl space-y-4 px-4 py-6">
-      <RoundGroupNav round={round} group={group} onRoundChange={setRound} onGroupChange={setGroup} />
+      <RoundGroupNav
+        round={round}
+        group={group}
+        onRoundChange={setRound}
+        onGroupChange={setGroup}
+        matches={matches}
+      />
       <p className="text-sm text-slate-500">
         {filtered.length} / {matches.length} jogos
       </p>

@@ -15,6 +15,8 @@
       "home_team": "México",
       "away_team": "África do Sul",
       "date": "2026-06-11",
+      "round": 1,
+      "stage": "Group A",
       "confidence": 0.711,
       "top_scores": [
         {
@@ -135,9 +137,9 @@
           "away": 0.178
         },
         "bayesian": {
-          "home": 0.677,
-          "draw": 0.173,
-          "away": 0.15
+          "home": 0.664,
+          "draw": 0.176,
+          "away": 0.16
         },
         "dixon_coles_xg": {
           "home": 0.4,
@@ -157,6 +159,8 @@
       "home_team": "Coreia do Sul",
       "away_team": "República Tcheca",
       "date": "2026-06-11",
+      "round": 1,
+      "stage": "Group A",
       "confidence": 0.4,
       "top_scores": [
         {
@@ -277,9 +281,9 @@
           "away": 0.3
         },
         "bayesian": {
-          "home": 0.293,
-          "draw": 0.288,
-          "away": 0.419
+          "home": 0.294,
+          "draw": 0.281,
+          "away": 0.426
         },
         "dixon_coles_xg": {
           "home": 0.176,
@@ -299,6 +303,8 @@
       "home_team": "Estados Unidos",
       "away_team": "Paraguai",
       "date": "2026-06-12",
+      "round": 1,
+      "stage": "Group D",
       "confidence": 0.426,
       "top_scores": [
         {
@@ -419,9 +425,9 @@
           "away": 0.335
         },
         "bayesian": {
-          "home": 0.746,
-          "draw": 0.131,
-          "away": 0.124
+          "home": 0.745,
+          "draw": 0.133,
+          "away": 0.122
         },
         "dixon_coles_xg": {
           "home": 0.509,
@@ -445,6 +451,8 @@
       "home_team": "Canadá",
       "away_team": "Bósnia e Herzegovina",
       "date": "2026-06-12",
+      "round": 1,
+      "stage": "Group B",
       "confidence": 0.573,
       "top_scores": [
         {
@@ -565,9 +573,9 @@
           "away": 0.177
         },
         "bayesian": {
-          "home": 0.467,
-          "draw": 0.254,
-          "away": 0.278
+          "home": 0.471,
+          "draw": 0.255,
+          "away": 0.275
         },
         "dixon_coles_xg": {
           "home": 0.4,
@@ -587,6 +595,8 @@
       "home_team": "Austrália",
       "away_team": "Turquia",
       "date": "2026-06-13",
+      "round": 1,
+      "stage": "Group D",
       "confidence": 0.533,
       "top_scores": [
         {
@@ -708,8 +718,8 @@
         },
         "bayesian": {
           "home": 0.001,
-          "draw": 0.139,
-          "away": 0.861
+          "draw": 0.136,
+          "away": 0.863
         },
         "dixon_coles_xg": {
           "home": 0.089,
@@ -733,6 +743,8 @@
       "home_team": "Brasil",
       "away_team": "Marrocos",
       "date": "2026-06-13",
+      "round": 1,
+      "stage": "Group C",
       "confidence": 0.365,
       "top_scores": [
         {
@@ -853,8 +865,8 @@
           "away": 0.345
         },
         "bayesian": {
-          "home": 0.557,
-          "draw": 0.302,
+          "home": 0.564,
+          "draw": 0.294,
           "away": 0.142
         },
         "dixon_coles_xg": {
@@ -879,6 +891,8 @@
       "home_team": "Catar",
       "away_team": "Suíça",
       "date": "2026-06-13",
+      "round": 1,
+      "stage": "Group B",
       "confidence": 0.928,
       "top_scores": [
         {
@@ -999,9 +1013,9 @@
           "away": 0.68
         },
         "bayesian": {
-          "home": 0.078,
-          "draw": 0.114,
-          "away": 0.808
+          "home": 0.082,
+          "draw": 0.117,
+          "away": 0.801
         },
         "dixon_coles_xg": {
           "home": 0.091,
@@ -1025,6 +1039,8 @@
       "home_team": "Haiti",
       "away_team": "Escócia",
       "date": "2026-06-13",
+      "round": 1,
+      "stage": "Group C",
       "confidence": 0.73,
       "top_scores": [
         {
@@ -1145,9 +1161,9 @@
           "away": 0.474
         },
         "bayesian": {
-          "home": 0.181,
-          "draw": 0.212,
-          "away": 0.607
+          "home": 0.174,
+          "draw": 0.21,
+          "away": 0.616
         },
         "dixon_coles_xg": {
           "home": 0.4,
@@ -1171,6 +1187,8 @@
       "home_team": "Holanda",
       "away_team": "Japão",
       "date": "2026-06-14",
+      "round": 1,
+      "stage": "Group F",
       "confidence": 0.416,
       "top_scores": [
         {
@@ -1291,9 +1309,9 @@
           "away": 0.409
         },
         "bayesian": {
-          "home": 0.3,
-          "draw": 0.199,
-          "away": 0.501
+          "home": 0.299,
+          "draw": 0.202,
+          "away": 0.499
         },
         "dixon_coles_xg": {
           "home": 0.484,
@@ -1317,6 +1335,8 @@
       "home_team": "Alemanha",
       "away_team": "Curaçao",
       "date": "2026-06-14",
+      "round": 1,
+      "stage": "Group E",
       "confidence": 0.972,
       "top_scores": [
         {
@@ -1437,9 +1457,9 @@
           "away": 0.132
         },
         "bayesian": {
-          "home": 0.937,
-          "draw": 0.042,
-          "away": 0.021
+          "home": 0.931,
+          "draw": 0.047,
+          "away": 0.022
         },
         "dixon_coles_xg": {
           "home": 0.4,
@@ -1463,6 +1483,8 @@
       "home_team": "Costa do Marfim",
       "away_team": "Equador",
       "date": "2026-06-14",
+      "round": 1,
+      "stage": "Group E",
       "confidence": 0.487,
       "top_scores": [
         {
@@ -1583,9 +1605,9 @@
           "away": 0.46
         },
         "bayesian": {
-          "home": 0.292,
-          "draw": 0.547,
-          "away": 0.161
+          "home": 0.302,
+          "draw": 0.543,
+          "away": 0.155
         },
         "dixon_coles_xg": {
           "home": 0.233,
@@ -1609,6 +1631,8 @@
       "home_team": "Suécia",
       "away_team": "Tunísia",
       "date": "2026-06-14",
+      "round": 1,
+      "stage": "Group F",
       "confidence": 0.67,
       "top_scores": [
         {
@@ -1729,9 +1753,9 @@
           "away": 0.373
         },
         "bayesian": {
-          "home": 0.547,
-          "draw": 0.142,
-          "away": 0.311
+          "home": 0.568,
+          "draw": 0.137,
+          "away": 0.295
         },
         "dixon_coles_xg": {
           "home": 0.328,
@@ -1755,6 +1779,8 @@
       "home_team": "Espanha",
       "away_team": "Cabo Verde",
       "date": "2026-06-15",
+      "round": 1,
+      "stage": "Group H",
       "confidence": 0.901,
       "top_scores": [
         {
@@ -1875,9 +1901,9 @@
           "away": 0.127
         },
         "bayesian": {
-          "home": 0.887,
-          "draw": 0.059,
-          "away": 0.054
+          "home": 0.893,
+          "draw": 0.056,
+          "away": 0.051
         },
         "dixon_coles_xg": {
           "home": 0.355,
@@ -1901,6 +1927,8 @@
       "home_team": "Irã",
       "away_team": "Nova Zelândia",
       "date": "2026-06-15",
+      "round": 1,
+      "stage": "Group G",
       "confidence": 0.643,
       "top_scores": [
         {
@@ -2021,9 +2049,9 @@
           "away": 0.205
         },
         "bayesian": {
-          "home": 0.418,
-          "draw": 0.175,
-          "away": 0.407
+          "home": 0.396,
+          "draw": 0.181,
+          "away": 0.423
         },
         "dixon_coles_xg": {
           "home": 0.4,
@@ -2047,6 +2075,8 @@
       "home_team": "Arábia Saudita",
       "away_team": "Uruguai",
       "date": "2026-06-15",
+      "round": 1,
+      "stage": "Group H",
       "confidence": 0.62,
       "top_scores": [
         {
@@ -2193,6 +2223,8 @@
       "home_team": "Bélgica",
       "away_team": "Egito",
       "date": "2026-06-15",
+      "round": 1,
+      "stage": "Group G",
       "confidence": 0.572,
       "top_scores": [
         {
@@ -2313,9 +2345,9 @@
           "away": 0.322
         },
         "bayesian": {
-          "home": 0.366,
-          "draw": 0.278,
-          "away": 0.357
+          "home": 0.382,
+          "draw": 0.276,
+          "away": 0.343
         },
         "dixon_coles_xg": {
           "home": 0.303,
@@ -2339,6 +2371,8 @@
       "home_team": "França",
       "away_team": "Senegal",
       "date": "2026-06-16",
+      "round": 1,
+      "stage": "Group I",
       "confidence": 0.543,
       "top_scores": [
         {
@@ -2459,9 +2493,9 @@
           "away": 0.256
         },
         "bayesian": {
-          "home": 0.658,
+          "home": 0.646,
           "draw": 0.195,
-          "away": 0.147
+          "away": 0.159
         },
         "dixon_coles_xg": {
           "home": 0.566,
@@ -2485,6 +2519,8 @@
       "home_team": "Áustria",
       "away_team": "Jordânia",
       "date": "2026-06-16",
+      "round": 1,
+      "stage": "Group J",
       "confidence": 0.679,
       "top_scores": [
         {
@@ -2605,9 +2641,9 @@
           "away": 0.288
         },
         "bayesian": {
-          "home": 0.657,
+          "home": 0.662,
           "draw": 0.187,
-          "away": 0.157
+          "away": 0.151
         },
         "dixon_coles_xg": {
           "home": 0.4,
@@ -2631,6 +2667,8 @@
       "home_team": "Argentina",
       "away_team": "Argélia",
       "date": "2026-06-16",
+      "round": 1,
+      "stage": "Group J",
       "confidence": 0.739,
       "top_scores": [
         {
@@ -2751,9 +2789,9 @@
           "away": 0.223
         },
         "bayesian": {
-          "home": 0.843,
-          "draw": 0.119,
-          "away": 0.038
+          "home": 0.845,
+          "draw": 0.117,
+          "away": 0.037
         },
         "dixon_coles_xg": {
           "home": 0.526,
@@ -2777,6 +2815,8 @@
       "home_team": "Iraque",
       "away_team": "Noruega",
       "date": "2026-06-16",
+      "round": 1,
+      "stage": "Group I",
       "confidence": 0.88,
       "top_scores": [
         {
@@ -2898,8 +2938,8 @@
         },
         "bayesian": {
           "home": 0.036,
-          "draw": 0.069,
-          "away": 0.895
+          "draw": 0.07,
+          "away": 0.894
         },
         "dixon_coles_xg": {
           "home": 0.4,
@@ -2923,6 +2963,8 @@
       "home_team": "Portugal",
       "away_team": "RD Congo",
       "date": "2026-06-17",
+      "round": 1,
+      "stage": "Group K",
       "confidence": 0.555,
       "top_scores": [
         {
@@ -3043,9 +3085,9 @@
           "away": 0.21
         },
         "bayesian": {
-          "home": 0.379,
-          "draw": 0.288,
-          "away": 0.332
+          "home": 0.38,
+          "draw": 0.281,
+          "away": 0.339
         },
         "dixon_coles_xg": {
           "home": 0.4,
@@ -3069,6 +3111,8 @@
       "home_team": "Inglaterra",
       "away_team": "Croácia",
       "date": "2026-06-17",
+      "round": 1,
+      "stage": "Group L",
       "confidence": 0.653,
       "top_scores": [
         {
@@ -3189,9 +3233,9 @@
           "away": 0.345
         },
         "bayesian": {
-          "home": 0.803,
-          "draw": 0.112,
-          "away": 0.085
+          "home": 0.819,
+          "draw": 0.106,
+          "away": 0.075
         },
         "dixon_coles_xg": {
           "home": 0.295,
@@ -3215,6 +3259,8 @@
       "home_team": "Uzbequistão",
       "away_team": "Colômbia",
       "date": "2026-06-17",
+      "round": 1,
+      "stage": "Group K",
       "confidence": 0.733,
       "top_scores": [
         {
@@ -3335,9 +3381,9 @@
           "away": 0.613
         },
         "bayesian": {
-          "home": 0.047,
-          "draw": 0.111,
-          "away": 0.842
+          "home": 0.048,
+          "draw": 0.114,
+          "away": 0.838
         },
         "dixon_coles_xg": {
           "home": 0.4,
@@ -3361,6 +3407,8 @@
       "home_team": "Gana",
       "away_team": "Panamá",
       "date": "2026-06-17",
+      "round": 1,
+      "stage": "Group L",
       "confidence": 0.387,
       "top_scores": [
         {
@@ -3481,9 +3529,9 @@
           "away": 0.47
         },
         "bayesian": {
-          "home": 0.533,
-          "draw": 0.466,
-          "away": 0.001
+          "home": 0.528,
+          "draw": 0.47,
+          "away": 0.002
         },
         "dixon_coles_xg": {
           "home": 0.284,
@@ -3507,6 +3555,8 @@
       "home_team": "República Tcheca",
       "away_team": "África do Sul",
       "date": "2026-06-18",
+      "round": 2,
+      "stage": "Group A",
       "confidence": 0.415,
       "top_scores": [
         {
@@ -3627,9 +3677,9 @@
           "away": 0.349
         },
         "bayesian": {
-          "home": 0.394,
-          "draw": 0.128,
-          "away": 0.478
+          "home": 0.395,
+          "draw": 0.124,
+          "away": 0.481
         },
         "dixon_coles_xg": {
           "home": 0.4,
@@ -3653,6 +3703,8 @@
       "home_team": "Canadá",
       "away_team": "Catar",
       "date": "2026-06-18",
+      "round": 2,
+      "stage": "Group B",
       "confidence": 0.841,
       "top_scores": [
         {
@@ -3773,9 +3825,9 @@
           "away": 0.171
         },
         "bayesian": {
-          "home": 0.54,
-          "draw": 0.212,
-          "away": 0.247
+          "home": 0.531,
+          "draw": 0.219,
+          "away": 0.25
         },
         "dixon_coles_xg": {
           "home": 0.766,
@@ -3799,6 +3851,8 @@
       "home_team": "Suíça",
       "away_team": "Bósnia e Herzegovina",
       "date": "2026-06-18",
+      "round": 2,
+      "stage": "Group B",
       "confidence": 0.717,
       "top_scores": [
         {
@@ -3919,8 +3973,8 @@
           "away": 0.19
         },
         "bayesian": {
-          "home": 0.747,
-          "draw": 0.154,
+          "home": 0.75,
+          "draw": 0.151,
           "away": 0.1
         },
         "dixon_coles_xg": {
@@ -3945,6 +3999,8 @@
       "home_team": "México",
       "away_team": "Coreia do Sul",
       "date": "2026-06-18",
+      "round": 2,
+      "stage": "Group A",
       "confidence": 0.606,
       "top_scores": [
         {
@@ -4065,9 +4121,9 @@
           "away": 0.267
         },
         "bayesian": {
-          "home": 0.504,
-          "draw": 0.403,
-          "away": 0.093
+          "home": 0.502,
+          "draw": 0.402,
+          "away": 0.096
         },
         "dixon_coles_xg": {
           "home": 0.494,
@@ -4091,6 +4147,8 @@
       "home_team": "Brasil",
       "away_team": "Haiti",
       "date": "2026-06-19",
+      "round": 2,
+      "stage": "Group C",
       "confidence": 0.89,
       "top_scores": [
         {
@@ -4211,9 +4269,9 @@
           "away": 0.131
         },
         "bayesian": {
-          "home": 0.912,
+          "home": 0.911,
           "draw": 0.07,
-          "away": 0.018
+          "away": 0.019
         },
         "dixon_coles_xg": {
           "home": 0.4,
@@ -4237,6 +4295,8 @@
       "home_team": "Estados Unidos",
       "away_team": "Austrália",
       "date": "2026-06-19",
+      "round": 2,
+      "stage": "Group D",
       "confidence": 0.383,
       "top_scores": [
         {
@@ -4357,8 +4417,8 @@
           "away": 0.357
         },
         "bayesian": {
-          "home": 0.825,
-          "draw": 0.172,
+          "home": 0.822,
+          "draw": 0.176,
           "away": 0.003
         },
         "dixon_coles_xg": {
@@ -4383,6 +4443,8 @@
       "home_team": "Turquia",
       "away_team": "Paraguai",
       "date": "2026-06-19",
+      "round": 2,
+      "stage": "Group D",
       "confidence": 0.574,
       "top_scores": [
         {
@@ -4503,9 +4565,9 @@
           "away": 0.365
         },
         "bayesian": {
-          "home": 0.878,
-          "draw": 0.087,
-          "away": 0.035
+          "home": 0.874,
+          "draw": 0.088,
+          "away": 0.038
         },
         "dixon_coles_xg": {
           "home": 0.31,
@@ -4529,6 +4591,8 @@
       "home_team": "Escócia",
       "away_team": "Marrocos",
       "date": "2026-06-19",
+      "round": 2,
+      "stage": "Group C",
       "confidence": 0.504,
       "top_scores": [
         {
@@ -4649,9 +4713,9 @@
           "away": 0.642
         },
         "bayesian": {
-          "home": 0.192,
-          "draw": 0.28,
-          "away": 0.528
+          "home": 0.201,
+          "draw": 0.285,
+          "away": 0.514
         },
         "dixon_coles_xg": {
           "home": 0.079,
@@ -4675,6 +4739,8 @@
       "home_team": "Tunísia",
       "away_team": "Japão",
       "date": "2026-06-20",
+      "round": 2,
+      "stage": "Group F",
       "confidence": 0.778,
       "top_scores": [
         {
@@ -4795,9 +4861,9 @@
           "away": 0.622
         },
         "bayesian": {
-          "home": 0.069,
-          "draw": 0.091,
-          "away": 0.84
+          "home": 0.063,
+          "draw": 0.087,
+          "away": 0.851
         },
         "dixon_coles_xg": {
           "home": 0.287,
@@ -4821,6 +4887,8 @@
       "home_team": "Holanda",
       "away_team": "Suécia",
       "date": "2026-06-20",
+      "round": 2,
+      "stage": "Group F",
       "confidence": 0.683,
       "top_scores": [
         {
@@ -4941,9 +5009,9 @@
           "away": 0.24
         },
         "bayesian": {
-          "home": 0.701,
-          "draw": 0.121,
-          "away": 0.177
+          "home": 0.698,
+          "draw": 0.124,
+          "away": 0.178
         },
         "dixon_coles_xg": {
           "home": 0.478,
@@ -4967,6 +5035,8 @@
       "home_team": "Equador",
       "away_team": "Curaçao",
       "date": "2026-06-20",
+      "round": 2,
+      "stage": "Group E",
       "confidence": 0.718,
       "top_scores": [
         {
@@ -5087,9 +5157,9 @@
           "away": 0.145
         },
         "bayesian": {
-          "home": 0.456,
-          "draw": 0.43,
-          "away": 0.114
+          "home": 0.439,
+          "draw": 0.436,
+          "away": 0.125
         },
         "dixon_coles_xg": {
           "home": 0.4,
@@ -5113,6 +5183,8 @@
       "home_team": "Alemanha",
       "away_team": "Costa do Marfim",
       "date": "2026-06-20",
+      "round": 2,
+      "stage": "Group E",
       "confidence": 0.63,
       "top_scores": [
         {
@@ -5233,9 +5305,9 @@
           "away": 0.298
         },
         "bayesian": {
-          "home": 0.553,
+          "home": 0.565,
           "draw": 0.216,
-          "away": 0.232
+          "away": 0.219
         },
         "dixon_coles_xg": {
           "home": 0.553,
@@ -5259,6 +5331,8 @@
       "home_team": "Espanha",
       "away_team": "Arábia Saudita",
       "date": "2026-06-21",
+      "round": 2,
+      "stage": "Group H",
       "confidence": 0.893,
       "top_scores": [
         {
@@ -5405,6 +5479,8 @@
       "home_team": "Bélgica",
       "away_team": "Irã",
       "date": "2026-06-21",
+      "round": 2,
+      "stage": "Group G",
       "confidence": 0.585,
       "top_scores": [
         {
@@ -5525,9 +5601,9 @@
           "away": 0.368
         },
         "bayesian": {
-          "home": 0.851,
-          "draw": 0.091,
-          "away": 0.059
+          "home": 0.865,
+          "draw": 0.085,
+          "away": 0.05
         },
         "dixon_coles_xg": {
           "home": 0.422,
@@ -5551,6 +5627,8 @@
       "home_team": "Uruguai",
       "away_team": "Cabo Verde",
       "date": "2026-06-21",
+      "round": 2,
+      "stage": "Group H",
       "confidence": 0.626,
       "top_scores": [
         {
@@ -5671,9 +5749,9 @@
           "away": 0.231
         },
         "bayesian": {
-          "home": 0.449,
-          "draw": 0.184,
-          "away": 0.367
+          "home": 0.459,
+          "draw": 0.181,
+          "away": 0.36
         },
         "dixon_coles_xg": {
           "home": 0.275,
@@ -5697,6 +5775,8 @@
       "home_team": "Nova Zelândia",
       "away_team": "Egito",
       "date": "2026-06-21",
+      "round": 2,
+      "stage": "Group G",
       "confidence": 0.585,
       "top_scores": [
         {
@@ -5817,9 +5897,9 @@
           "away": 0.577
         },
         "bayesian": {
-          "home": 0.06,
-          "draw": 0.113,
-          "away": 0.827
+          "home": 0.063,
+          "draw": 0.112,
+          "away": 0.825
         },
         "dixon_coles_xg": {
           "home": 0.4,
@@ -5843,6 +5923,8 @@
       "home_team": "França",
       "away_team": "Iraque",
       "date": "2026-06-22",
+      "round": 2,
+      "stage": "Group I",
       "confidence": 0.878,
       "top_scores": [
         {
@@ -5963,8 +6045,8 @@
           "away": 0.16
         },
         "bayesian": {
-          "home": 0.923,
-          "draw": 0.063,
+          "home": 0.926,
+          "draw": 0.06,
           "away": 0.014
         },
         "dixon_coles_xg": {
@@ -5989,6 +6071,8 @@
       "home_team": "Jordânia",
       "away_team": "Argélia",
       "date": "2026-06-22",
+      "round": 2,
+      "stage": "Group J",
       "confidence": 0.553,
       "top_scores": [
         {
@@ -6109,9 +6193,9 @@
           "away": 0.575
         },
         "bayesian": {
-          "home": 0.237,
+          "home": 0.228,
           "draw": 0.226,
-          "away": 0.538
+          "away": 0.545
         },
         "dixon_coles_xg": {
           "home": 0.4,
@@ -6135,6 +6219,8 @@
       "home_team": "Argentina",
       "away_team": "Áustria",
       "date": "2026-06-22",
+      "round": 2,
+      "stage": "Group J",
       "confidence": 0.622,
       "top_scores": [
         {
@@ -6255,9 +6341,9 @@
           "away": 0.182
         },
         "bayesian": {
-          "home": 0.787,
-          "draw": 0.151,
-          "away": 0.062
+          "home": 0.79,
+          "draw": 0.15,
+          "away": 0.06
         },
         "dixon_coles_xg": {
           "home": 0.4,
@@ -6281,6 +6367,8 @@
       "home_team": "Noruega",
       "away_team": "Senegal",
       "date": "2026-06-22",
+      "round": 2,
+      "stage": "Group I",
       "confidence": 0.46,
       "top_scores": [
         {
@@ -6401,9 +6489,9 @@
           "away": 0.44
         },
         "bayesian": {
-          "home": 0.484,
-          "draw": 0.172,
-          "away": 0.345
+          "home": 0.468,
+          "draw": 0.175,
+          "away": 0.357
         },
         "dixon_coles_xg": {
           "home": 0.4,
@@ -6427,6 +6515,8 @@
       "home_team": "Portugal",
       "away_team": "Uzbequistão",
       "date": "2026-06-23",
+      "round": 2,
+      "stage": "Group K",
       "confidence": 0.817,
       "top_scores": [
         {
@@ -6547,9 +6637,9 @@
           "away": 0.244
         },
         "bayesian": {
-          "home": 0.832,
-          "draw": 0.108,
-          "away": 0.06
+          "home": 0.839,
+          "draw": 0.104,
+          "away": 0.056
         },
         "dixon_coles_xg": {
           "home": 0.4,
@@ -6573,6 +6663,8 @@
       "home_team": "Inglaterra",
       "away_team": "Gana",
       "date": "2026-06-23",
+      "round": 2,
+      "stage": "Group L",
       "confidence": 0.712,
       "top_scores": [
         {
@@ -6693,9 +6785,9 @@
           "away": 0.18
         },
         "bayesian": {
-          "home": 0.375,
-          "draw": 0.418,
-          "away": 0.207
+          "home": 0.395,
+          "draw": 0.41,
+          "away": 0.195
         },
         "dixon_coles_xg": {
           "home": 0.499,
@@ -6719,6 +6811,8 @@
       "home_team": "Colômbia",
       "away_team": "RD Congo",
       "date": "2026-06-23",
+      "round": 2,
+      "stage": "Group K",
       "confidence": 0.465,
       "top_scores": [
         {
@@ -6839,9 +6933,9 @@
           "away": 0.187
         },
         "bayesian": {
-          "home": 0.411,
-          "draw": 0.321,
-          "away": 0.268
+          "home": 0.407,
+          "draw": 0.314,
+          "away": 0.279
         },
         "dixon_coles_xg": {
           "home": 0.603,
@@ -6865,6 +6959,8 @@
       "home_team": "Panamá",
       "away_team": "Croácia",
       "date": "2026-06-23",
+      "round": 2,
+      "stage": "Group L",
       "confidence": 0.57,
       "top_scores": [
         {
@@ -6986,8 +7082,8 @@
         },
         "bayesian": {
           "home": 0.004,
-          "draw": 0.256,
-          "away": 0.74
+          "draw": 0.255,
+          "away": 0.741
         },
         "dixon_coles_xg": {
           "home": 0.168,
@@ -7011,6 +7107,8 @@
       "home_team": "África do Sul",
       "away_team": "Coreia do Sul",
       "date": "2026-06-24",
+      "round": 3,
+      "stage": "Group A",
       "confidence": 0.433,
       "top_scores": [
         {
@@ -7131,9 +7229,9 @@
           "away": 0.528
         },
         "bayesian": {
-          "home": 0.494,
-          "draw": 0.225,
-          "away": 0.281
+          "home": 0.504,
+          "draw": 0.221,
+          "away": 0.275
         },
         "dixon_coles_xg": {
           "home": 0.606,
@@ -7157,6 +7255,8 @@
       "home_team": "Marrocos",
       "away_team": "Haiti",
       "date": "2026-06-24",
+      "round": 3,
+      "stage": "Group C",
       "confidence": 0.831,
       "top_scores": [
         {
@@ -7277,9 +7377,9 @@
           "away": 0.153
         },
         "bayesian": {
-          "home": 0.783,
+          "home": 0.781,
           "draw": 0.141,
-          "away": 0.076
+          "away": 0.078
         },
         "dixon_coles_xg": {
           "home": 0.4,
@@ -7303,6 +7403,8 @@
       "home_team": "Escócia",
       "away_team": "Brasil",
       "date": "2026-06-24",
+      "round": 3,
+      "stage": "Group C",
       "confidence": 0.577,
       "top_scores": [
         {
@@ -7423,9 +7525,9 @@
           "away": 0.693
         },
         "bayesian": {
-          "home": 0.064,
-          "draw": 0.206,
-          "away": 0.731
+          "home": 0.069,
+          "draw": 0.21,
+          "away": 0.72
         },
         "dixon_coles_xg": {
           "home": 0.08,
@@ -7449,6 +7551,8 @@
       "home_team": "Canadá",
       "away_team": "Suíça",
       "date": "2026-06-24",
+      "round": 3,
+      "stage": "Group B",
       "confidence": 0.513,
       "top_scores": [
         {
@@ -7569,9 +7673,9 @@
           "away": 0.363
         },
         "bayesian": {
-          "home": 0.156,
-          "draw": 0.181,
-          "away": 0.664
+          "home": 0.158,
+          "draw": 0.18,
+          "away": 0.662
         },
         "dixon_coles_xg": {
           "home": 0.4,
@@ -7595,6 +7699,8 @@
       "home_team": "México",
       "away_team": "República Tcheca",
       "date": "2026-06-24",
+      "round": 3,
+      "stage": "Group A",
       "confidence": 0.687,
       "top_scores": [
         {
@@ -7715,9 +7821,9 @@
           "away": 0.201
         },
         "bayesian": {
-          "home": 0.655,
-          "draw": 0.214,
-          "away": 0.131
+          "home": 0.641,
+          "draw": 0.218,
+          "away": 0.141
         },
         "dixon_coles_xg": {
           "home": 0.534,
@@ -7741,6 +7847,8 @@
       "home_team": "Bósnia e Herzegovina",
       "away_team": "Catar",
       "date": "2026-06-24",
+      "round": 3,
+      "stage": "Group B",
       "confidence": 0.649,
       "top_scores": [
         {
@@ -7861,9 +7969,9 @@
           "away": 0.375
         },
         "bayesian": {
-          "home": 0.432,
-          "draw": 0.235,
-          "away": 0.333
+          "home": 0.421,
+          "draw": 0.24,
+          "away": 0.339
         },
         "dixon_coles_xg": {
           "home": 0.4,
@@ -7887,6 +7995,8 @@
       "home_team": "Japão",
       "away_team": "Suécia",
       "date": "2026-06-25",
+      "round": 3,
+      "stage": "Group F",
       "confidence": 0.6,
       "top_scores": [
         {
@@ -8007,9 +8117,9 @@
           "away": 0.223
         },
         "bayesian": {
-          "home": 0.79,
-          "draw": 0.093,
-          "away": 0.117
+          "home": 0.793,
+          "draw": 0.094,
+          "away": 0.113
         },
         "dixon_coles_xg": {
           "home": 0.399,
@@ -8033,6 +8143,8 @@
       "home_team": "Paraguai",
       "away_team": "Austrália",
       "date": "2026-06-25",
+      "round": 3,
+      "stage": "Group D",
       "confidence": 0.371,
       "top_scores": [
         {
@@ -8153,9 +8265,9 @@
           "away": 0.409
         },
         "bayesian": {
-          "home": 0.554,
-          "draw": 0.436,
-          "away": 0.01
+          "home": 0.553,
+          "draw": 0.438,
+          "away": 0.009
         },
         "dixon_coles_xg": {
           "home": 0.395,
@@ -8179,6 +8291,8 @@
       "home_team": "Estados Unidos",
       "away_team": "Turquia",
       "date": "2026-06-25",
+      "round": 3,
+      "stage": "Group D",
       "confidence": 0.585,
       "top_scores": [
         {
@@ -8299,8 +8413,8 @@
           "away": 0.353
         },
         "bayesian": {
-          "home": 0.166,
-          "draw": 0.156,
+          "home": 0.169,
+          "draw": 0.153,
           "away": 0.678
         },
         "dixon_coles_xg": {
@@ -8325,6 +8439,8 @@
       "home_team": "Equador",
       "away_team": "Alemanha",
       "date": "2026-06-25",
+      "round": 3,
+      "stage": "Group E",
       "confidence": 0.419,
       "top_scores": [
         {
@@ -8445,9 +8561,9 @@
           "away": 0.408
         },
         "bayesian": {
-          "home": 0.134,
-          "draw": 0.29,
-          "away": 0.576
+          "home": 0.119,
+          "draw": 0.284,
+          "away": 0.596
         },
         "dixon_coles_xg": {
           "home": 0.246,
@@ -8471,6 +8587,8 @@
       "home_team": "Curaçao",
       "away_team": "Costa do Marfim",
       "date": "2026-06-25",
+      "round": 3,
+      "stage": "Group E",
       "confidence": 0.711,
       "top_scores": [
         {
@@ -8591,9 +8709,9 @@
           "away": 0.676
         },
         "bayesian": {
-          "home": 0.073,
-          "draw": 0.21,
-          "away": 0.717
+          "home": 0.075,
+          "draw": 0.213,
+          "away": 0.712
         },
         "dixon_coles_xg": {
           "home": 0.4,
@@ -8617,6 +8735,8 @@
       "home_team": "Tunísia",
       "away_team": "Holanda",
       "date": "2026-06-25",
+      "round": 3,
+      "stage": "Group F",
       "confidence": 0.849,
       "top_scores": [
         {
@@ -8737,9 +8857,9 @@
           "away": 0.592
         },
         "bayesian": {
-          "home": 0.111,
-          "draw": 0.132,
-          "away": 0.757
+          "home": 0.108,
+          "draw": 0.127,
+          "away": 0.765
         },
         "dixon_coles_xg": {
           "home": 0.181,
@@ -8763,6 +8883,8 @@
       "home_team": "Egito",
       "away_team": "Irã",
       "date": "2026-06-26",
+      "round": 3,
+      "stage": "Group G",
       "confidence": 0.359,
       "top_scores": [
         {
@@ -8883,9 +9005,9 @@
           "away": 0.437
         },
         "bayesian": {
-          "home": 0.791,
-          "draw": 0.145,
-          "away": 0.065
+          "home": 0.797,
+          "draw": 0.139,
+          "away": 0.064
         },
         "dixon_coles_xg": {
           "home": 0.4,
@@ -8909,6 +9031,8 @@
       "home_team": "Noruega",
       "away_team": "França",
       "date": "2026-06-26",
+      "round": 3,
+      "stage": "Group I",
       "confidence": 0.52,
       "top_scores": [
         {
@@ -9029,9 +9153,9 @@
           "away": 0.616
         },
         "bayesian": {
-          "home": 0.182,
-          "draw": 0.173,
-          "away": 0.646
+          "home": 0.186,
+          "draw": 0.178,
+          "away": 0.637
         },
         "dixon_coles_xg": {
           "home": 0.4,
@@ -9055,6 +9179,8 @@
       "home_team": "Nova Zelândia",
       "away_team": "Bélgica",
       "date": "2026-06-26",
+      "round": 3,
+      "stage": "Group G",
       "confidence": 0.851,
       "top_scores": [
         {
@@ -9175,9 +9301,9 @@
           "away": 0.661
         },
         "bayesian": {
-          "home": 0.052,
-          "draw": 0.07,
-          "away": 0.878
+          "home": 0.045,
+          "draw": 0.066,
+          "away": 0.889
         },
         "dixon_coles_xg": {
           "home": 0.4,
@@ -9201,6 +9327,8 @@
       "home_team": "Cabo Verde",
       "away_team": "Arábia Saudita",
       "date": "2026-06-26",
+      "round": 3,
+      "stage": "Group H",
       "confidence": 0.384,
       "top_scores": [
         {
@@ -9347,6 +9475,8 @@
       "home_team": "Uruguai",
       "away_team": "Espanha",
       "date": "2026-06-26",
+      "round": 3,
+      "stage": "Group H",
       "confidence": 0.584,
       "top_scores": [
         {
@@ -9468,8 +9598,8 @@
         },
         "bayesian": {
           "home": 0.073,
-          "draw": 0.343,
-          "away": 0.584
+          "draw": 0.347,
+          "away": 0.58
         },
         "dixon_coles_xg": {
           "home": 0.266,
@@ -9493,6 +9623,8 @@
       "home_team": "Senegal",
       "away_team": "Iraque",
       "date": "2026-06-26",
+      "round": 3,
+      "stage": "Group I",
       "confidence": 0.791,
       "top_scores": [
         {
@@ -9613,9 +9745,9 @@
           "away": 0.258
         },
         "bayesian": {
-          "home": 0.824,
-          "draw": 0.118,
-          "away": 0.058
+          "home": 0.839,
+          "draw": 0.109,
+          "away": 0.052
         },
         "dixon_coles_xg": {
           "home": 0.4,
@@ -9639,6 +9771,8 @@
       "home_team": "Croácia",
       "away_team": "Gana",
       "date": "2026-06-27",
+      "round": 3,
+      "stage": "Group L",
       "confidence": 0.5,
       "top_scores": [
         {
@@ -9759,9 +9893,9 @@
           "away": 0.207
         },
         "bayesian": {
-          "home": 0.149,
-          "draw": 0.319,
-          "away": 0.533
+          "home": 0.158,
+          "draw": 0.314,
+          "away": 0.528
         },
         "dixon_coles_xg": {
           "home": 0.62,
@@ -9785,6 +9919,8 @@
       "home_team": "Colômbia",
       "away_team": "Portugal",
       "date": "2026-06-27",
+      "round": 3,
+      "stage": "Group K",
       "confidence": 0.473,
       "top_scores": [
         {
@@ -9905,9 +10041,9 @@
           "away": 0.351
         },
         "bayesian": {
-          "home": 0.488,
-          "draw": 0.171,
-          "away": 0.341
+          "home": 0.478,
+          "draw": 0.17,
+          "away": 0.351
         },
         "dixon_coles_xg": {
           "home": 0.552,
@@ -9931,6 +10067,8 @@
       "home_team": "RD Congo",
       "away_team": "Uzbequistão",
       "date": "2026-06-27",
+      "round": 3,
+      "stage": "Group K",
       "confidence": 0.474,
       "top_scores": [
         {
@@ -10051,9 +10189,9 @@
           "away": 0.435
         },
         "bayesian": {
-          "home": 0.633,
-          "draw": 0.287,
-          "away": 0.08
+          "home": 0.643,
+          "draw": 0.281,
+          "away": 0.077
         },
         "dixon_coles_xg": {
           "home": 0.4,
@@ -10077,6 +10215,8 @@
       "home_team": "Panamá",
       "away_team": "Inglaterra",
       "date": "2026-06-27",
+      "round": 3,
+      "stage": "Group L",
       "confidence": 0.773,
       "top_scores": [
         {
@@ -10198,8 +10338,8 @@
         },
         "bayesian": {
           "home": 0.001,
-          "draw": 0.136,
-          "away": 0.863
+          "draw": 0.13,
+          "away": 0.87
         },
         "dixon_coles_xg": {
           "home": 0.2,
@@ -10223,6 +10363,8 @@
       "home_team": "Argélia",
       "away_team": "Áustria",
       "date": "2026-06-27",
+      "round": 3,
+      "stage": "Group J",
       "confidence": 0.488,
       "top_scores": [
         {
@@ -10343,8 +10485,8 @@
           "away": 0.327
         },
         "bayesian": {
-          "home": 0.262,
-          "draw": 0.286,
+          "home": 0.256,
+          "draw": 0.292,
           "away": 0.452
         },
         "dixon_coles_xg": {
@@ -10369,6 +10511,8 @@
       "home_team": "Jordânia",
       "away_team": "Argentina",
       "date": "2026-06-27",
+      "round": 3,
+      "stage": "Group J",
       "confidence": 0.875,
       "top_scores": [
         {
@@ -10489,9 +10633,9 @@
           "away": 0.803
         },
         "bayesian": {
-          "home": 0.014,
-          "draw": 0.044,
-          "away": 0.942
+          "home": 0.013,
+          "draw": 0.042,
+          "away": 0.945
         },
         "dixon_coles_xg": {
           "home": 0.4,
@@ -10515,6 +10659,8 @@
       "home_team": "África do Sul",
       "away_team": "Canadá",
       "date": "2026-06-28",
+      "round": 4,
+      "stage": "Round of 32",
       "confidence": 0.47,
       "top_scores": [
         {
@@ -10635,9 +10781,9 @@
           "away": 0.5
         },
         "bayesian": {
-          "home": 0.256,
+          "home": 0.269,
           "draw": 0.15,
-          "away": 0.593
+          "away": 0.582
         },
         "dixon_coles_xg": {
           "home": 0.4,
@@ -10661,6 +10807,8 @@
       "home_team": "Alemanha",
       "away_team": "Paraguai",
       "date": "2026-06-29",
+      "round": 4,
+      "stage": "Round of 32",
       "confidence": 0.723,
       "top_scores": [
         {
@@ -10781,9 +10929,9 @@
           "away": 0.29
         },
         "bayesian": {
-          "home": 0.952,
+          "home": 0.955,
           "draw": 0.031,
-          "away": 0.016
+          "away": 0.014
         },
         "dixon_coles_xg": {
           "home": 0.706,
@@ -10807,6 +10955,8 @@
       "home_team": "Holanda",
       "away_team": "Marrocos",
       "date": "2026-06-29",
+      "round": 4,
+      "stage": "Round of 32",
       "confidence": 0.359,
       "top_scores": [
         {
@@ -10927,9 +11077,9 @@
           "away": 0.417
         },
         "bayesian": {
-          "home": 0.467,
-          "draw": 0.257,
-          "away": 0.276
+          "home": 0.478,
+          "draw": 0.252,
+          "away": 0.269
         },
         "dixon_coles_xg": {
           "home": 0.247,
@@ -10953,6 +11103,8 @@
       "home_team": "Brasil",
       "away_team": "Japão",
       "date": "2026-06-29",
+      "round": 4,
+      "stage": "Round of 32",
       "confidence": 0.413,
       "top_scores": [
         {
@@ -11073,9 +11225,9 @@
           "away": 0.338
         },
         "bayesian": {
-          "home": 0.44,
-          "draw": 0.276,
-          "away": 0.283
+          "home": 0.442,
+          "draw": 0.277,
+          "away": 0.282
         },
         "dixon_coles_xg": {
           "home": 0.4,
@@ -11099,6 +11251,8 @@
       "home_team": "Costa do Marfim",
       "away_team": "Noruega",
       "date": "2026-06-30",
+      "round": 4,
+      "stage": "Round of 32",
       "confidence": 0.546,
       "top_scores": [
         {
@@ -11219,9 +11373,9 @@
           "away": 0.379
         },
         "bayesian": {
-          "home": 0.205,
-          "draw": 0.22,
-          "away": 0.574
+          "home": 0.204,
+          "draw": 0.223,
+          "away": 0.573
         },
         "dixon_coles_xg": {
           "home": 0.4,
@@ -11245,6 +11399,8 @@
       "home_team": "França",
       "away_team": "Suécia",
       "date": "2026-06-30",
+      "round": 4,
+      "stage": "Round of 32",
       "confidence": 0.719,
       "top_scores": [
         {
@@ -11365,9 +11521,9 @@
           "away": 0.168
         },
         "bayesian": {
-          "home": 0.879,
-          "draw": 0.072,
-          "away": 0.05
+          "home": 0.871,
+          "draw": 0.075,
+          "away": 0.053
         },
         "dixon_coles_xg": {
           "home": 0.621,
@@ -11391,6 +11547,8 @@
       "home_team": "México",
       "away_team": "Equador",
       "date": "2026-06-30",
+      "round": 4,
+      "stage": "Round of 32",
       "confidence": 0.478,
       "top_scores": [
         {
@@ -11511,9 +11669,9 @@
           "away": 0.319
         },
         "bayesian": {
-          "home": 0.304,
-          "draw": 0.571,
-          "away": 0.125
+          "home": 0.307,
+          "draw": 0.569,
+          "away": 0.124
         },
         "dixon_coles_xg": {
           "home": 0.431,
@@ -11537,6 +11695,8 @@
       "home_team": "Inglaterra",
       "away_team": "RD Congo",
       "date": "2026-07-01",
+      "round": 4,
+      "stage": "Round of 32",
       "confidence": 0.556,
       "top_scores": [
         {
@@ -11657,9 +11817,9 @@
           "away": 0.218
         },
         "bayesian": {
-          "home": 0.426,
-          "draw": 0.347,
-          "away": 0.227
+          "home": 0.431,
+          "draw": 0.338,
+          "away": 0.231
         },
         "dixon_coles_xg": {
           "home": 0.335,
@@ -11683,6 +11843,8 @@
       "home_team": "Estados Unidos",
       "away_team": "Bósnia e Herzegovina",
       "date": "2026-07-01",
+      "round": 4,
+      "stage": "Round of 32",
       "confidence": 0.57,
       "top_scores": [
         {
@@ -11805,7 +11967,7 @@
         "bayesian": {
           "home": 0.327,
           "draw": 0.204,
-          "away": 0.469
+          "away": 0.47
         },
         "dixon_coles_xg": {
           "home": 0.4,
@@ -11829,6 +11991,8 @@
       "home_team": "Bélgica",
       "away_team": "Senegal",
       "date": "2026-07-01",
+      "round": 4,
+      "stage": "Round of 32",
       "confidence": 0.378,
       "top_scores": [
         {
@@ -11949,9 +12113,9 @@
           "away": 0.364
         },
         "bayesian": {
-          "home": 0.236,
+          "home": 0.228,
           "draw": 0.189,
-          "away": 0.575
+          "away": 0.583
         },
         "dixon_coles_xg": {
           "home": 0.324,
@@ -11971,6 +12135,8 @@
       "home_team": "Espanha",
       "away_team": "Áustria",
       "date": "2026-07-02",
+      "round": 4,
+      "stage": "Round of 32",
       "confidence": 0.609,
       "top_scores": [
         {
@@ -12091,9 +12257,9 @@
           "away": 0.201
         },
         "bayesian": {
-          "home": 0.619,
-          "draw": 0.26,
-          "away": 0.121
+          "home": 0.614,
+          "draw": 0.267,
+          "away": 0.119
         },
         "dixon_coles_xg": {
           "home": 0.605,
@@ -12113,6 +12279,8 @@
       "home_team": "Portugal",
       "away_team": "Croácia",
       "date": "2026-07-02",
+      "round": 4,
+      "stage": "Round of 32",
       "confidence": 0.619,
       "top_scores": [
         {
@@ -12233,9 +12401,9 @@
           "away": 0.334
         },
         "bayesian": {
-          "home": 0.764,
-          "draw": 0.109,
-          "away": 0.127
+          "home": 0.759,
+          "draw": 0.107,
+          "away": 0.133
         },
         "dixon_coles_xg": {
           "home": 0.358,
@@ -12259,6 +12427,8 @@
       "home_team": "Suíça",
       "away_team": "Argélia",
       "date": "2026-07-02",
+      "round": 4,
+      "stage": "Round of 32",
       "confidence": 0.569,
       "top_scores": [
         {
@@ -12379,9 +12549,9 @@
           "away": 0.404
         },
         "bayesian": {
-          "home": 0.698,
-          "draw": 0.184,
-          "away": 0.118
+          "home": 0.695,
+          "draw": 0.183,
+          "away": 0.122
         },
         "dixon_coles_xg": {
           "home": 0.162,
@@ -12401,6 +12571,8 @@
       "home_team": "Argentina",
       "away_team": "Cabo Verde",
       "date": "2026-07-03",
+      "round": 4,
+      "stage": "Round of 32",
       "confidence": 0.891,
       "top_scores": [
         {
@@ -12521,9 +12693,9 @@
           "away": 0.113
         },
         "bayesian": {
-          "home": 0.94,
-          "draw": 0.03,
-          "away": 0.03
+          "home": 0.951,
+          "draw": 0.027,
+          "away": 0.022
         },
         "dixon_coles_xg": {
           "home": 0.523,
@@ -12547,6 +12719,8 @@
       "home_team": "Austrália",
       "away_team": "Egito",
       "date": "2026-07-03",
+      "round": 4,
+      "stage": "Round of 32",
       "confidence": 0.401,
       "top_scores": [
         {
@@ -12668,8 +12842,8 @@
         },
         "bayesian": {
           "home": 0.002,
-          "draw": 0.255,
-          "away": 0.743
+          "draw": 0.251,
+          "away": 0.747
         },
         "dixon_coles_xg": {
           "home": 0.027,
@@ -12693,6 +12867,8 @@
       "home_team": "Colômbia",
       "away_team": "Gana",
       "date": "2026-07-03",
+      "round": 4,
+      "stage": "Round of 32",
       "confidence": 0.619,
       "top_scores": [
         {
@@ -12813,9 +12989,9 @@
           "away": 0.153
         },
         "bayesian": {
-          "home": 0.371,
-          "draw": 0.388,
-          "away": 0.241
+          "home": 0.377,
+          "draw": 0.384,
+          "away": 0.239
         },
         "dixon_coles_xg": {
           "home": 0.674,
