@@ -1,0 +1,27 @@
+━━ LEAVE-ONE-TOURNAMENT-OUT CV ━━
+  Escopo dos folds: só Copas do Mundo  (2 folds: WC2018, WC2022)
+
+  Cada fold: seleção (pesos+funil) nos OUTROS torneios, testado 1x no retido.
+  ── Por fold (número honesto: o fold não influenciou a escolha) ──
+    WC2018      escolhido=poisson           n= 64  RPS=0.2029 [0.1684, 0.2401]  | pts/jogo=7.156
+    WC2022      escolhido=poisson           n= 64  RPS=0.2255 [0.1859, 0.2754]  | pts/jogo=7.188
+
+  ── Agregado out-of-fold (pool de 128 jogos retidos) ──
+    RPS = 0.2142 [0.1823, 0.2444]  ← número honesto de generalização
+    Pontos do bolão / jogo = 7.172 [5.808, 8.783]
+
+  ── Descritivo: RPS de cada modelo em cada fold (sem seleção) ──
+    modelo                  WC2018      WC2022
+    poisson                 0.2029      0.2255
+    elo                     0.2103      0.2110
+    dixon_coles             0.1992      0.2202
+    bivariate_poisson       0.2027      0.2248
+    dixon_coles_xg          0.2426      0.2336
+    bayesian                0.2506      0.2681
+    ensemble                0.2093      0.2273
+
+  ⚠ AVISO (poder estatístico): só 2 folds. O IC agregado vem do bootstrap sobre os JOGOS retidos, mas a variância ENTRE torneios
+    (contexto/edição) está mal amostrada com tão poucos folds. Não use isto para distinguir modelos próximos — use para sanidade de generalização.
+    Para um estimador mais robusto: rode com --cv-scope all (7 folds).
+
+  Lembrete: 1 rodada da Copa 2026 (~4-8 jogos) é DOMINADA por variância. Este CV mede generalização do método, não 'consertar' uma rodada ruim — re-tunar o modelo por causa de 1 rodada é exatamente o fator emocional a evitar.

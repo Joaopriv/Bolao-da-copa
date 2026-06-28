@@ -115,6 +115,12 @@ def cmd_fixtures(_args):
     scrape_fixtures()
 
 
+def cmd_knockout_fixtures(_args):
+    from scrapers.scraper_knockout_fixtures import scrape_knockout_fixtures
+    print("● Gravando fixtures do mata-mata (Round of 32, Copa 2026) ...")
+    scrape_knockout_fixtures()
+
+
 def cmd_scrape_xg(_args):
     from scrapers.scraper_xg import scrape_xg
     print("● Coletando xG via StatsBomb open data ...")
@@ -213,6 +219,57 @@ def cmd_blend_check(args):
     run(iters=args.iters, verbose=True)
 
 
+def cmd_build_multiples(args):
+    sys.path.insert(0, str(ROOT / "utils"))
+    from multiples import build
+    print("● Montando múltiplas de maior probabilidade de acerto (próximos jogos) ...")
+    build(profile=args.profile, legs=args.legs, round_n=args.round_n_multi)
+
+
+def cmd_multiples_backtest(args):
+    from multiples_backtest import run
+    print("● Backtest da estratégia de múltiplas (quantas de alta prob teriam batido) ...")
+    run(profile=args.profile, k=args.legs)
+
+
+def cmd_ev_multiples(args):
+    sys.path.insert(0, str(ROOT / "utils"))
+    from multiples import build_ev
+    print("● Montando múltiplas de maior EV (modelo × odds reais) -- próximos jogos ...")
+    build_ev(legs=args.legs, round_n=args.round_n_multi)
+
+
+def cmd_markets_check(args):
+    from markets_check import run
+    print("● Validação de mercados (over/under total e por time, BTTS, 1X2) -- "
+          "Brier Skill Score vs climatologia, walk-forward sem vazamento ...")
+    run(model_name=args.models[0] if args.models else None, iters=args.iters)
+
+
+def cmd_wc2026_calibration(args):
+    from wc2026_calibration import run
+    print("● Confiança do modelo x desempenho real -- fase de grupos da Copa 2026 "
+          "(walk-forward por rodada, sem vazamento) ...")
+    run(model_name=args.models[0] if args.models else None)
+
+
+def cmd_knockout_check(args):
+    from knockout_check import run
+    kinds = ("world_cup",) if args.knockout_scope == "wc" else None
+    escopo = "só Copas do Mundo" if kinds else "Copas + Euro + Copa América"
+    print(f"● Taxa de acerto (1X2) e RPS do modelo escolhido: fase de grupos vs. "
+          f"mata-mata ({escopo}) ...")
+    run(model_name=args.models[0] if args.models else None, iters=args.iters, kinds=kinds)
+
+
+def cmd_cv_tournaments(args):
+    from tournament_cv import run
+    fold_kind = "all" if args.cv_scope == "all" else "world_cup"
+    print(f"● Leave-one-tournament-out CV (escopo={fold_kind}): seleção nos outros "
+          "torneios, teste no fold retido ...")
+    run(fold_kind=fold_kind, iters=args.iters, verbose=True)
+
+
 def cmd_update_round(args):
     print(f"● --update-round {args.n}: Iteração 2 (aprendizado bayesiano sequencial).")
     from sequential_backtest import update_round
@@ -292,6 +349,9 @@ def build_parser():
                         "(sequencial vs estático) -- PAUSA antes da Copa 2026 ao vivo")
     p.add_argument("--scrape-fixtures", action="store_true",
                    help="baixa fixtures (round/grupo) da fase de grupos da Copa 2026")
+    p.add_argument("--scrape-knockout-fixtures", action="store_true",
+                   help="grava os confrontos do mata-mata (Round of 32) em matches + "
+                        "copa_2026_results")
     p.add_argument("--scrape-xg", action="store_true",
                    help="coleta xG por jogo via StatsBomb open data (matches.home_xg/away_xg)")
     p.add_argument("--national-impact", action="store_true",
@@ -322,6 +382,44 @@ def build_parser():
     p.add_argument("--blend-check", action="store_true",
                    help="[Blend modelo × mercado] valida RPS modelo vs blend (α fixo) nos jogos "
                         "da Copa com resultado real + odds; reporta IC da diferença (regra do IC)")
+    p.add_argument("--build-multiples", action="store_true",
+                   help="monta múltiplas de maior probabilidade de acerto para os próximos "
+                        "jogos (mercados bem calibrados; mostra a prob. conjunta)")
+    p.add_argument("--ev-multiples", action="store_true",
+                   help="monta múltiplas de maior EV (prob. modelo × odd real, 1X2): combina "
+                        "pernas de EV positivo (>=3); mostra EV e chance conjuntos")
+    p.add_argument("--multiples-backtest", action="store_true",
+                   help="backtest da estratégia de múltiplas nos torneios passados: prob "
+                        "conjunta prevista vs taxa real de acerto (usa --profile e --legs)")
+    p.add_argument("--profile", choices=("seguro", "vitoria", "gols"), default="seguro",
+                   help="perfil das pernas do --build-multiples: seguro=dupla chance, "
+                        "vitoria=vitória seca, gols=favorito marca 1+ (padrão: seguro)")
+    p.add_argument("--legs", type=int, default=3, metavar="N",
+                   help="nº de pernas por múltipla no --build-multiples (padrão: 3)")
+    p.add_argument("--round-multi", dest="round_n_multi", type=int, default=None, metavar="N",
+                   help="restringe o --build-multiples aos jogos da rodada/fase N")
+    p.add_argument("--markets-check", action="store_true",
+                   help="valida mercados (over/under total e por time, BTTS, 1X2) derivados "
+                        "da grade de placar: Brier Skill Score vs climatologia + calibração, "
+                        "walk-forward sem vazamento nos torneios de teste")
+    p.add_argument("--wc2026-calibration", action="store_true",
+                   help="confiança do modelo (faixas de 10%%) x desempenho real (acerto "
+                        "vitória/erro/placar cravado) nos jogos JÁ JOGADOS da fase de "
+                        "grupos da Copa 2026, walk-forward por rodada (sem vazamento)")
+    p.add_argument("--knockout-check", action="store_true",
+                   help="taxa de acerto (1X2) + RPS do modelo escolhido (ou --models, 1º nome) "
+                        "restrito aos jogos de mata-mata dos torneios de teste, vs. fase de "
+                        "grupos (diagnóstico)")
+    p.add_argument("--knockout-scope", choices=("wc", "all"), default="wc",
+                   help="--knockout-check: 'wc' = só Copas do Mundo (padrão), 'all' = "
+                        "também Euro + Copa América")
+    p.add_argument("--cv-tournaments", action="store_true",
+                   help="[Validação cruzada] leave-one-tournament-out CV: rotaciona o torneio "
+                        "retido, seleciona nos demais e testa no retido (número honesto de "
+                        "generalização). Padrão: só Copas (--cv-scope wc).")
+    p.add_argument("--cv-scope", choices=("wc", "all"), default="wc",
+                   help="folds do --cv-tournaments: 'wc' = só Copas do Mundo (padrão, 2 folds), "
+                        "'all' = os 7 torneios (mais robusto)")
     p.add_argument("--montecarlo", action="store_true",
                    help="simulação Monte Carlo da distribuição de pontos/acertos na fase de "
                         "grupos (consome predictions_2026.json + utils/scoring.py)")
@@ -370,6 +468,8 @@ def main(argv=None):
         cmd_backtest_rounds(args); ran = True
     if args.scrape_fixtures:
         cmd_fixtures(args); ran = True
+    if args.scrape_knockout_fixtures:
+        cmd_knockout_fixtures(args); ran = True
     if args.scrape_xg:
         cmd_scrape_xg(args); ran = True
     if args.national_impact:
@@ -396,6 +496,20 @@ def main(argv=None):
         cmd_calibration_check(args); ran = True
     if args.blend_check:
         cmd_blend_check(args); ran = True
+    if args.build_multiples:
+        cmd_build_multiples(args); ran = True
+    if args.ev_multiples:
+        cmd_ev_multiples(args); ran = True
+    if args.multiples_backtest:
+        cmd_multiples_backtest(args); ran = True
+    if args.markets_check:
+        cmd_markets_check(args); ran = True
+    if args.wc2026_calibration:
+        cmd_wc2026_calibration(args); ran = True
+    if args.knockout_check:
+        cmd_knockout_check(args); ran = True
+    if args.cv_tournaments:
+        cmd_cv_tournaments(args); ran = True
     if args.montecarlo:
         cmd_montecarlo(args); ran = True
     if not ran:
