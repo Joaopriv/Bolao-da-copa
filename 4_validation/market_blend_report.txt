@@ -4,7 +4,7 @@
  Teste direto nos jogos da Copa 2026 com resultado real + odds disponíveis.
 
  AMOSTRA
-   jogos com resultado real + odds .... 1
+   jogos com resultado real + odds .... 45
    excluídos (resultado mas SEM odds) .. 3:
        México 2×0 África do Sul
        Coreia do Sul 1×1 República Tcheca
@@ -12,20 +12,59 @@
 
  RPS POR JOGO (menor é melhor)
    jogo                                         modelo    blend        Δ
-   Estados Unidos 4×1 Paraguai                  0.3746   0.2649  -0.1098
+   Estados Unidos 4×1 Paraguai                  0.2039   0.1895  -0.0144
+   Espanha 4×0 Arábia Saudita                   0.0057   0.0077  +0.0020
+   Bélgica 0×0 Irã                              0.1717   0.2012  +0.0295
+   Uruguai 2×2 Cabo Verde                       0.2035   0.2142  +0.0107
+   Nova Zelândia 1×3 Egito                      0.1351   0.1281  -0.0070
+   Argentina 2×0 Áustria                        0.0808   0.0904  +0.0096
+   França 3×0 Iraque                            0.0181   0.0149  -0.0033
+   Noruega 3×2 Senegal                          0.1063   0.1461  +0.0397
+   Jordânia 1×2 Argélia                         0.1362   0.1058  -0.0304
+   Portugal 5×0 Uzbequistão                     0.0187   0.0246  +0.0059
+   Inglaterra 0×0 Gana                          0.2636   0.2631  -0.0005
+   Panamá 0×1 Croácia                           0.1080   0.0968  -0.0112
+   Colômbia 1×0 RD Congo                        0.1567   0.1088  -0.0479
+   República Tcheca 1×1 África do Sul           0.1516   0.1589  +0.0073
+   México 1×0 Coreia do Sul                     0.1085   0.1340  +0.0255
+   Suíça 4×1 Bósnia e Herzegovina               0.0442   0.0661  +0.0218
+   Canadá 6×0 Catar                             0.0180   0.0280  +0.0100
+   Brasil 3×0 Haiti                             0.0154   0.0106  -0.0048
+   Escócia 0×1 Marrocos                         0.1455   0.1530  +0.0074
+   Turquia 0×1 Paraguai                         0.5364   0.4609  -0.0756
+   Estados Unidos 2×0 Austrália                 0.2408   0.1612  -0.0796
+   Alemanha 2×1 Costa do Marfim                 0.0555   0.0711  +0.0156
+   Equador 0×0 Curaçao                          0.2267   0.2711  +0.0445
+   Holanda 5×1 Suécia                           0.0540   0.0763  +0.0222
+   Tunísia 0×4 Japão                            0.0240   0.0599  +0.0359
+   Catar 1×1 Suíça                              0.4171   0.3619  -0.0552
+   Brasil 1×1 Marrocos                          0.0961   0.1173  +0.0212
+   Haiti 0×1 Escócia                            0.0341   0.0575  +0.0234
+   Austrália 2×0 Turquia                        0.4975   0.4930  -0.0044
+   Alemanha 7×1 Curaçao                         0.0004   0.0015  +0.0011
+   Costa do Marfim 1×0 Equador                  0.3910   0.3678  -0.0231
+   Suécia 5×1 Tunísia                           0.0592   0.0985  +0.0393
+   Holanda 2×2 Japão                            0.1439   0.1454  +0.0015
+   Bélgica 1×1 Egito                            0.1676   0.1789  +0.0113
+   Irã 2×2 Nova Zelândia                        0.1888   0.1726  -0.0161
+   Espanha 0×0 Cabo Verde                       0.4080   0.3974  -0.0106
+   Arábia Saudita 1×1 Uruguai                   0.1983   0.2144  +0.0162
+   França 3×1 Senegal                           0.1078   0.0876  -0.0202
+   Áustria 3×1 Jordânia                         0.0614   0.0524  -0.0090
+   Argentina 3×0 Argélia                        0.0359   0.0450  +0.0090
+   Portugal 1×1 RD Congo                        0.1774   0.2256  +0.0482
+   Inglaterra 4×2 Croácia                       0.0656   0.0897  +0.0241
+   Gana 1×0 Panamá                              0.2345   0.2129  -0.0216
+   Iraque 1×4 Noruega                           0.0111   0.0164  +0.0053
+   Uzbequistão 1×3 Colômbia                     0.0420   0.0475  +0.0055
 
  RPS MÉDIO
-   modelo puro ........ 0.3746
-   blend (α=0.5) ..... 0.2649
-   diferença média .... -0.1098  (negativo = blend melhor)
+   modelo puro ........ 0.1459
+   blend (α=0.5) ..... 0.1472
+   diferença média .... +0.0013  (negativo = blend melhor)
 
  IC95% BOOTSTRAP DA DIFERENÇA (blend - modelo, 1000 reamostras)
-   ponto: -0.1098  IC: [-0.1098, -0.1098]
+   ponto: +0.0013  IC: [-0.0067, +0.0100]
 
- DECISÃO: INCONCLUSIVO (N=1 < 30 -> amostra insuficiente para um IC confiável; aguardar mais rodadas). Mantém enabled=false.
+ DECISÃO: DESCARTADO por Occam (IC95% cruza zero -> equivalente, sem ganho comprovado)
 
- ⚠ AVISO HONESTO: N=1 é pequeno demais para um veredito.
-   Com N=1 o bootstrap é DEGENERADO (toda reamostra é o mesmo jogo ->
-   IC de largura zero). O 'IC todo < 0' acima é artefato, NÃO evidência.
-   Decisão suspensa até N >= 30 (~Rodada 2-3). O teste
-   ganha poder a cada rodada: re-rodar --blend-check após --update-round.
