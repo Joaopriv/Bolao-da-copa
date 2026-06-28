@@ -1,12 +1,12 @@
 {
   "chosen_model": "poisson",
   "ensemble_weights": {
-    "poisson": 0.2152135869832806,
-    "dixon_coles": 0.32753275918502733,
-    "bivariate_poisson": 0.23160687040267458,
-    "elo": 0.2256467834290174,
+    "poisson": 0.2152125521214348,
+    "dixon_coles": 0.32752907124159747,
+    "bivariate_poisson": 0.23161188511143488,
+    "elo": 0.22564649152553296,
     "bayesian": 0.0,
-    "dixon_coles_xg": 8.569310116350541e-17
+    "dixon_coles_xg": 0.0
   },
   "cutoff_year": 2021,
   "validation_tournaments": [
@@ -22,17 +22,17 @@
   ],
   "in_sample_RPS": {
     "name": "RPS",
-    "point": 0.1806237767192056,
-    "lo": 0.16066898782810318,
-    "hi": 0.2031997204329258,
+    "point": 0.1806237405383714,
+    "lo": 0.15934264816593557,
+    "hi": 0.2016379206222823,
     "n": 169,
     "lower_is_better": true
   },
   "out_of_sample_RPS": {
     "name": "RPS",
-    "point": 0.19640056071400613,
-    "lo": 0.1722859150911737,
-    "hi": 0.22313492180467817,
+    "point": 0.19640056071426615,
+    "lo": 0.17380366201560954,
+    "hi": 0.2219569327159567,
     "n": 147,
     "lower_is_better": true
   },
@@ -53,5 +53,5 @@
     ],
     "chosen": "poisson"
   },
-  "justification": "Descartados por IC da diferença longe de zero (claramente piores): baseline_naive, baseline_ranking, bayesian, dixon_coles_xg. Equivalentes estatisticamente (IC da diferença cruza zero): poisson, elo, dixon_coles, bivariate_poisson, ensemble. Entre os equivalentes, escolhido 'poisson' por ser o mais simples (navalha de Occam). RPS in-sample (<= 2021) = 0.1806 [0.1607, 0.2032]; RPS out-of-sample (> 2021) = 0.1964 [0.1723, 0.2231] (este é o número honesto). Nota (P2/P7): 'equivalentes' = indistinguíveis dada a amostra de validação (poder estatístico limitado), não 'comprovadamente iguais'; e o RPS in-sample do escolhido tende a ser otimista (winner's curse) -- use o out-of-sample para expectativas futuras. Iteração 1: sem xG/elenco/sequencial — adiados para a Iteração 2 por falta de fonte de dados."
+  "justification": "Descartados por IC da diferença longe de zero (claramente piores): baseline_naive, baseline_ranking, bayesian, dixon_coles_xg. Equivalentes estatisticamente (IC da diferença cruza zero): poisson, elo, dixon_coles, bivariate_poisson, ensemble. Entre os equivalentes, escolhido 'poisson' por ser o mais simples (navalha de Occam). RPS in-sample (<= 2021) = 0.1806 [0.1593, 0.2016]; RPS out-of-sample (> 2021) = 0.1964 [0.1738, 0.2220] (este é o número honesto). Nota (P2/P7): 'equivalentes' = indistinguíveis dada a amostra de validação (poder estatístico limitado), não 'comprovadamente iguais'; e o RPS in-sample do escolhido tende a ser otimista (winner's curse) -- use o out-of-sample para expectativas futuras. Iteração 1: sem xG/elenco/sequencial — adiados para a Iteração 2 por falta de fonte de dados."
 }
