@@ -96,6 +96,21 @@ def cmd_fetch_odds(_args):
         print("⚠ Créditos da API restantes < 50 — uso de --fetch-odds deve ser espaçado.")
 
 
+def cmd_fetch_market_odds(_args):
+    sys.path.insert(0, str(ROOT / "utils"))
+    from odds_fetcher import fetch_and_store_market_odds
+    print("● Buscando odds de mercado EXPANDIDAS (total O/U, BTTS, team totals) "
+          "-> odds_2026_markets (isolado do bolão) ...")
+    info = fetch_and_store_market_odds(verbose=True)
+    credits = info["credits_remaining"]
+    print(f"Mercados gravados: {info['rows']} linhas em {info['games']} jogos. "
+          f"Com odd: {', '.join(info['markets_found']) or '(nenhum)'}. "
+          f"Sem odd: {', '.join(info['markets_missing']) or '(nenhum)'}. "
+          f"Créditos restantes: {credits}")
+    if credits is not None and credits < 50:
+        print("⚠ Créditos da API restantes < 50 — uso de --fetch-market-odds deve ser espaçado.")
+
+
 def cmd_insert_result(args):
     from sequential_backtest import insert_result
     print("● Registrando resultado real (Copa 2026) ...")
@@ -226,10 +241,24 @@ def cmd_build_multiples(args):
     build(profile=args.profile, legs=args.legs, round_n=args.round_n_multi)
 
 
+def cmd_multiples_menu(args):
+    from multiples_menu import run
+    print("● Cardápio de múltiplas (1X2 + totals + BTTS, EV real) -- ranqueado por faixa "
+          "de retorno, jogos da rodada atual (READ-ONLY) ...")
+    run(round_n=args.round_n_multi, top=args.menu_top)
+
+
 def cmd_multiples_backtest(args):
     from multiples_backtest import run
     print("● Backtest da estratégia de múltiplas (quantas de alta prob teriam batido) ...")
     run(profile=args.profile, k=args.legs)
+
+
+def cmd_multiples_calibration(args):
+    from multiples_calibration import run
+    print("● Calibração do MOTOR de múltiplas (prob conjunta prevista vs observada) -- "
+          "same-game pela grade + cross-game por produto, 3 recortes (READ-ONLY) ...")
+    run(profile=args.profile, iters=args.iters)
 
 
 def cmd_ev_multiples(args):
@@ -244,6 +273,13 @@ def cmd_markets_check(args):
     print("● Validação de mercados (over/under total e por time, BTTS, 1X2) -- "
           "Brier Skill Score vs climatologia, walk-forward sem vazamento ...")
     run(model_name=args.models[0] if args.models else None, iters=args.iters)
+
+
+def cmd_markets_compare(args):
+    from markets_check import run_compare
+    print("● Comparação de modelos no pool completo (grupos + mata-mata) -- "
+          "1X2=RPS, binários=Brier, bootstrap PAREADO vs referência (READ-ONLY) ...")
+    run_compare(model_names=args.models or None, iters=args.iters)
 
 
 def cmd_wc2026_calibration(args):
@@ -335,6 +371,10 @@ def build_parser():
                    help="cruza previsões com odds de mercado (The Odds API)")
     p.add_argument("--fetch-odds", action="store_true",
                    help="[Iteração 2 / Prompt E] busca odds de mercado (The Odds API) -> odds_2026")
+    p.add_argument("--fetch-market-odds", action="store_true",
+                   help="busca odds EXPANDIDAS (total O/U, BTTS, team totals) com de-vig -> "
+                        "tabela odds_2026_markets (ISOLADO: não toca odds_2026 nem o bolão); "
+                        "alimenta o gerador de múltiplas com EV real")
     p.add_argument("--insert-result", action="store_true",
                    help="[Iteração 2 / Prompt E] registra o placar real de um jogo da Copa 2026 "
                         "(use com --home --away --score --date)")
@@ -391,6 +431,17 @@ def build_parser():
     p.add_argument("--multiples-backtest", action="store_true",
                    help="backtest da estratégia de múltiplas nos torneios passados: prob "
                         "conjunta prevista vs taxa real de acerto (usa --profile e --legs)")
+    p.add_argument("--multiples-calibration", action="store_true",
+                   help="calibração do MOTOR de múltiplas (READ-ONLY): conjunta same-game pela "
+                        "grade + cross-game por produto; previsto vs observado com IC (cluster-"
+                        "bootstrap por jogo) em 3 recortes -- mata-mata, grupos+KO e por época "
+                        "(WC2010/14/18/22). Usa --profile p/ a perna cross-game")
+    p.add_argument("--multiples-menu", action="store_true",
+                   help="cardápio rico de múltiplas (1X2 + totals + BTTS) com EV real "
+                        "(odds dos 3 mercados): duplas/triplas same-game, cross-game e misto, "
+                        "ranqueadas POR FAIXA DE RETORNO; usa --round-multi e --menu-top")
+    p.add_argument("--menu-top", type=int, default=5, metavar="N",
+                   help="nº de múltiplas por faixa de retorno no --multiples-menu (padrão: 5)")
     p.add_argument("--profile", choices=("seguro", "vitoria", "gols"), default="seguro",
                    help="perfil das pernas do --build-multiples: seguro=dupla chance, "
                         "vitoria=vitória seca, gols=favorito marca 1+ (padrão: seguro)")
@@ -402,6 +453,11 @@ def build_parser():
                    help="valida mercados (over/under total e por time, BTTS, 1X2) derivados "
                         "da grade de placar: Brier Skill Score vs climatologia + calibração, "
                         "walk-forward sem vazamento nos torneios de teste")
+    p.add_argument("--markets-compare", action="store_true",
+                   help="compara modelos (padrão: poisson, dixon_coles, bivariate_poisson) no "
+                        "pool completo (grupos + mata-mata): 1X2=RPS e binários=Brier por "
+                        "mercado, com Δ vs referência (1º modelo) via bootstrap PAREADO + IC95%% "
+                        "(READ-ONLY; use --models p/ trocar a lista, 1º = referência)")
     p.add_argument("--wc2026-calibration", action="store_true",
                    help="confiança do modelo (faixas de 10%%) x desempenho real (acerto "
                         "vitória/erro/placar cravado) nos jogos JÁ JOGADOS da fase de "
@@ -460,6 +516,8 @@ def main(argv=None):
         cmd_odds_check(args); ran = True
     if args.fetch_odds:
         cmd_fetch_odds(args); ran = True
+    if args.fetch_market_odds:
+        cmd_fetch_market_odds(args); ran = True
     if args.insert_result:
         cmd_insert_result(args); ran = True
     if args.fetch_results:
@@ -500,10 +558,16 @@ def main(argv=None):
         cmd_build_multiples(args); ran = True
     if args.ev_multiples:
         cmd_ev_multiples(args); ran = True
+    if args.multiples_menu:
+        cmd_multiples_menu(args); ran = True
     if args.multiples_backtest:
         cmd_multiples_backtest(args); ran = True
+    if args.multiples_calibration:
+        cmd_multiples_calibration(args); ran = True
     if args.markets_check:
         cmd_markets_check(args); ran = True
+    if args.markets_compare:
+        cmd_markets_compare(args); ran = True
     if args.wc2026_calibration:
         cmd_wc2026_calibration(args); ran = True
     if args.knockout_check:
