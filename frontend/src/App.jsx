@@ -7,6 +7,7 @@ import Header from "./components/layout/Header";
 import NavTabs from "./components/layout/NavTabs";
 import Dashboard from "./components/dashboard/Dashboard";
 import MyBetsSection from "./components/mybets/MyBetsSection";
+import ApostasSection from "./components/apostas/ApostasSection";
 import ModelReportSection from "./components/report/ModelReportSection";
 import LiveUpdateSection from "./components/liveupdate/LiveUpdateSection";
 
@@ -69,6 +70,7 @@ export default function App() {
       {activeTab === "mybets" && (
         <MyBetsSection matches={matches} picks={picks} results={results} />
       )}
+      {activeTab === "apostas" && <ApostasSection />}
       {activeTab === "report" && <ModelReportSection selectedModel={selectedModel} />}
       {activeTab === "live" && (
         <LiveUpdateSection

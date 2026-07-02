@@ -1,6 +1,7 @@
 const TABS = [
   { id: "dashboard", label: "Dashboard" },
   { id: "mybets", label: "Minhas apostas" },
+  { id: "apostas", label: "Apostas" },
   { id: "report", label: "Relatório do modelo" },
   { id: "live", label: "Update ao vivo" },
 ];

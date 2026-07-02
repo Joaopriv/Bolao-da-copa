@@ -248,6 +248,21 @@ def cmd_multiples_menu(args):
     run(round_n=args.round_n_multi, top=args.menu_top)
 
 
+def cmd_multiples_target(args):
+    from multiples_menu import run_target
+    print("● Monta-livre de múltiplas -- fixa odd-alvo ou prob-alvo e resolve o melhor "
+          "conjunto de pernas pro outro eixo (mesmo motor do --multiples-menu, READ-ONLY) ...")
+    run_target(round_n=args.round_n_multi, target_odd=args.target_odd,
+               target_prob=args.target_prob)
+
+
+def cmd_multiples_export(args):
+    from multiples_menu import export
+    print("● Exportando cardápio de múltiplas (evaluated completo) p/ o frontend "
+          "(READ-ONLY, sob demanda) ...")
+    export(round_n=args.round_n_multi)
+
+
 def cmd_multiples_backtest(args):
     from multiples_backtest import run
     print("● Backtest da estratégia de múltiplas (quantas de alta prob teriam batido) ...")
@@ -442,6 +457,22 @@ def build_parser():
                         "ranqueadas POR FAIXA DE RETORNO; usa --round-multi e --menu-top")
     p.add_argument("--menu-top", type=int, default=5, metavar="N",
                    help="nº de múltiplas por faixa de retorno no --multiples-menu (padrão: 5)")
+    p.add_argument("--multiples-target", action="store_true",
+                   help="monta-livre: fixa --target-odd OU --target-prob e resolve o melhor "
+                        "conjunto de pernas pro outro eixo (mesmo motor/pool/flags do "
+                        "--multiples-menu); usa --round-multi")
+    _target_group = p.add_mutually_exclusive_group()
+    _target_group.add_argument("--target-odd", type=float, default=None, metavar="N",
+                                help="odd-alvo p/ --multiples-target: busca maior prob "
+                                     "conjunta com retorno dentro de ±15%% de N")
+    _target_group.add_argument("--target-prob", type=float, default=None, metavar="P",
+                                help="prob-alvo (0-1) p/ --multiples-target: busca maior "
+                                     "retorno com prob conjunta >= P")
+    p.add_argument("--multiples-export", action="store_true",
+                   help="exporta TODO o conjunto evaluated (duplas/triplas, EV real) pra JSON em "
+                        "5_outputs/multiplas_2026.json + frontend/public/data/; usa --round-multi. "
+                        "Alimenta a aba Apostas (Sugeridas/Monta-livre) do frontend. Fora do "
+                        "--auto-round -- roda sob demanda.")
     p.add_argument("--profile", choices=("seguro", "vitoria", "gols"), default="seguro",
                    help="perfil das pernas do --build-multiples: seguro=dupla chance, "
                         "vitoria=vitória seca, gols=favorito marca 1+ (padrão: seguro)")
@@ -560,6 +591,10 @@ def main(argv=None):
         cmd_ev_multiples(args); ran = True
     if args.multiples_menu:
         cmd_multiples_menu(args); ran = True
+    if args.multiples_target:
+        cmd_multiples_target(args); ran = True
+    if args.multiples_export:
+        cmd_multiples_export(args); ran = True
     if args.multiples_backtest:
         cmd_multiples_backtest(args); ran = True
     if args.multiples_calibration:
